@@ -9,15 +9,8 @@
 
 
 /* Switch definitions. */
-//#define SWITCH_1 (PA1_IDR)
-//#define SWITCH_2 (PA2_IDR)
-
-
-/* Debug switch definitions. */
-uint16_t a = 0;
-uint16_t b = 0;
-#define SWITCH_1 (a)
-#define SWITCH_2 (b)
+#define SWITCH_1 (PA1_IDR)
+#define SWITCH_2 (PA2_IDR)
 
 
 /* Global variable for count. */
