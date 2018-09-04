@@ -19,5 +19,5 @@ void setup_pins()
     GPIOC->MODER |= 0x5555;
     
     /* Reset PC[3:0] to ensure count of 0 on startup. */
-    GPIOC->BSRR |= (0xFF << 16);
+    GPIOC->BSRR |= (0xFFFF << 16);
 }
