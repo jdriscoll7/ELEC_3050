@@ -14,8 +14,8 @@
 
 
 /* Global variable for count. */
-int8_t g_count = 0;
-int8_t g_count2 = 0;
+static int8_t g_count = 0;
+static int8_t g_count2 = 0;
 
 
 /* Counts up for direction == 0 and down for direction == 1. */
