@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 
-/* Delays for 5 seconds by doing meaningless adds. */
+/* Delays for 0.5 seconds by doing meaningless adds. */
 void delay()
 {
     uint32_t count = 0;
