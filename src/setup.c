@@ -8,13 +8,13 @@ void setup_pins()
     /* Setup input pins. */
     
     /* Enable GPIOA clock and set modes of PA1 and PA2 to input. */
-    RCC->AHBENR |= 0x01;
+    RCC->AHBENR |= GPIOA_RCC_EN;
     GPIOA->MODER &= ~(0x0000003C);
 
     /* Setup output pins. */
     
     /* Enable GPIOC clock and set modes of PC[7:0] to output ("01" repeated 8 times on lower bits of MODER). */
-    RCC->AHBENR |= 0x04;
+    RCC->AHBENR |= GPIOC_RCC_EN;
     GPIOC->MODER &= ~(0x0000AAAA);
     GPIOC->MODER |= 0x5555;
     
