@@ -9,7 +9,7 @@ void setup_pins()
     
     /* Enable GPIOA clock and set modes of PA1 and PA2 to input. */
     RCC->AHBENR |= GPIOA_RCC_EN;
-    GPIOA->MODER &= ~(PA1_MODE_INPUT | PA2_MODE_INPUT);
+    GPIOA->MODER &= ~(P1_MODE_INPUT | P2_MODE_INPUT);
 
     /* Setup output pins. */
     
