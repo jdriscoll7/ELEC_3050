@@ -10,10 +10,9 @@
 
 
 /* Definitions for specific pin MODER modes. */
-#define PA0_MODE_INPUT 0x00000003
-#define PA1_MODE_INPUT 0x0000000C
-#define PA2_MODE_INPUT 0x00000030
-#define PA2_MODE_INPUT 0x00000030
+#define P0_MODE_INPUT 0x00000003
+#define P1_MODE_INPUT 0x0000000C
+#define P2_MODE_INPUT 0x00000030
 
 
 /* Definitions for GPIOA input data registers. */
