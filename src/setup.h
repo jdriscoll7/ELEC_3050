@@ -9,6 +9,10 @@
 #define GPIOC_RCC_EN 0x04
 
 
+/* Definitions for specific pin MODER modes. */
+#define PA1_MODE_IN 0x0C
+#define PA2_MODE_IN 0x30
+
 /* Definitions for GPIOA input data registers. */
 #define PA0_IDR (GPIOA->IDR & 0x01)
 #define PA1_IDR (GPIOA->IDR & 0x02)
