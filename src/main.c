@@ -53,7 +53,7 @@ int main()
     while (1)
     {   
         /* Make sure switch is on. */
-        while (SWITCH_1 == 1)
+        while (SWITCH_1 != 0)
         {
             /* Delay and count. */
             delay();
