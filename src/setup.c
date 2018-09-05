@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "pin_operations.h"
+#include "setup.h"
 
 
 /* A large function that just sets up a few different pins for basic operation. */
