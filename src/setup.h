@@ -10,8 +10,11 @@
 
 
 /* Definitions for specific pin MODER modes. */
-#define PA1_MODE_IN 0x0C
-#define PA2_MODE_IN 0x30
+#define PA0_MODE_IN 0x00000003
+#define PA1_MODE_IN 0x0000000C
+#define PA2_MODE_IN 0x00000030
+#define PA2_MODE_IN 0x00000030
+
 
 /* Definitions for GPIOA input data registers. */
 #define PA0_IDR (GPIOA->IDR & 0x01)
