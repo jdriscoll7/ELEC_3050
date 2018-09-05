@@ -4,7 +4,12 @@
 #include "STM32L1xx.h"
 
 
-/* Definitions for switch_1 and switch_2 input data. */
+/* GPIOA and GPIOC clock enable definitions. */
+#define GPIOA_RCC_EN 0x01
+#define GPIOC_RCC_EN 0x04
+
+
+/* Definitions for GPIOA input data registers. */
 #define PA0_IDR (GPIOA->IDR & 0x01)
 #define PA1_IDR (GPIOA->IDR & 0x02)
 #define PA2_IDR (GPIOA->IDR & 0x04)
