@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "STM32L1xx.h"
-#include "pin_operations.h"
+#include "setup.h"
 #include "timing_functions.h"
 
 
