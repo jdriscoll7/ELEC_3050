@@ -1,5 +1,5 @@
-#ifndef PIN_OPERATIONS_H
-#define PIN_OPERATIONS_H
+#ifndef SETUP_H
+#define SETUP_H
 
 #include "STM32L1xx.h"
 
