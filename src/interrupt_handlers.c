@@ -19,6 +19,9 @@ void EXTI0_IRQHandler(void)
        - Sets second counter to count up. */
 void EXTI1_IRQHandler(void)
 {
+    /* Toggle PC9 LED. */
+    
+       
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
     
