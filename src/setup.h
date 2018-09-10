@@ -8,8 +8,18 @@
 
 
 /* GPIOA and GPIOC clock enable definitions. */
+#define RCC_AHBENR   (RCC->AHBENR)
 #define GPIOA_RCC_EN 0x01
 #define GPIOC_RCC_EN 0x04
+
+
+/* GPIO definitions. */
+#define GPIOA_MODER     (GPI0A->MODER)
+#define GPIOC_MODER     (GPI0C->MODER)
+#define PC70_DOUT_SET   (0x5555)            /* Bits to set for PC[7:0] MODER (output). */
+#define PC70_DOUT_CLR   (~0x0000AAAA)       /* Bits to clear for PC[7:0] MODER (output). */
+#define PC98_DOUT_SET   (0x05 << (2*9))     /* Bits to set for PC[9:8] MODER (output). */
+#define PC98_DOUT_RST   (~(0x0A << (2*9)))  /* Bits to clear for PC[7:0] MODER (output). */
 
 
 /* Definitions for specific pin MODER modes. */

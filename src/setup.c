@@ -13,12 +13,16 @@ void setup_pins()
     /* Setup output pins. */
     
     /* Enable GPIOC clock and set modes of PC[7:0] to output ("01" repeated 8 times on lower bits of MODER). */
-    RCC->AHBENR |= GPIOC_RCC_EN;
-    GPIOC->MODER &= ~(0x0000AAAA);
-    GPIOC->MODER |= 0x5555;
+    RCC_AHBENR |= GPIOC_RCC_EN;
+    GPIOC_MODER &= PC70_DOUT_CLR; /* Clear relevant mode bits. */
+    GPIOC_MODER |= PC70_DOUT_SET; /* Set relevant mode bits. */
     
     /* Reset PC[7:0] to ensure count of 0 on startup. */
     GPIOC->BSRR |= (0x00FF << 16);
+    
+    /* Enable PC8 and PC9 as digital output. (LEDs) */
+    GPIOC_MODER &= PC98_DOUT_CLR; /* Clear relevant mode bits. */
+    GPIOC_MODER |= PC98_DOUT_SET; /* Clear relevant mode bits. */
 }
 
 
