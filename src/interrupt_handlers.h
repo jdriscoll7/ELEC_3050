@@ -7,7 +7,7 @@
 
 
 /* Macro for clearing pending interrupt signals. */
-#define CLEAR_INTERRUPT(x) (EXTI->EXTI_PR |= (0x1 << x))
+#define CLEAR_INTERRUPT(x) (EXTI->PR |= (0x1 << x))
 
 
 /* User push button interrupt handler.
