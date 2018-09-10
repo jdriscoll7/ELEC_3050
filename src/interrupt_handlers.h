@@ -10,7 +10,7 @@
 #define EXTI_PR (EXTI->PR)
 
 /* Definition for pins when used in ODR masking. */
-#define ODR_Pin(n) ((uint16_t) (0x1 << (n)))
+#define ODR_PIN(n) ((uint16_t) (0x1 << (n)))
 
 
 /* Toggles a bitfield using BSRR.
