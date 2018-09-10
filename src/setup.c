@@ -21,3 +21,8 @@ void setup_pins()
     /* Reset PC[7:0] to ensure count of 0 on startup. */
     GPIOC->BSRR |= (0x00FF << 16);
 }
+
+void setup_interrupts()
+{
+    
+}
