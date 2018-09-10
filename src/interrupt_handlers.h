@@ -14,6 +14,10 @@
 #define ODR_PIN(n) ((uint16_t) (0x1 << (n)))
 
 
+/* Variable used by main function that only interrupt handlers can access. */
+static uint8_t count_direction;
+
+
 /* Toggles a bitfield using BSRR.
        - Inputs:
            - GPIO_TypeDef gpio : The GPIO being considered.
