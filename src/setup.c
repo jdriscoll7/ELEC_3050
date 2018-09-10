@@ -34,8 +34,9 @@ void setup_interrupts()
     EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1); /* PA1. */
     
     /* Unmask EXTI0 and EXTI1 interrupt using EXTI module. */
-    EXTI_PR = EXTI_PR | EXTI_PR_CLEAR(0);
-        
+    EXTI_IMR = (EXTI_IMR & ~EXTI0_IMR_MASK) | EXTI0_IMR_MASK; /* PA0. */
+    EXTI_IMR = (EXTI_IMR & ~EXTI1_IMR_MASK) | EXTI1_IMR_MASK; /* PA1. */
+
     /* Enable interrupt 0 and 1 in NVIC. */
     NVIC_EnableIRQ(EXTI0_IRQn);    
     NVIC_EnableIRQ(EXTI1_IRQn);
