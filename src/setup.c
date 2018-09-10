@@ -6,9 +6,9 @@ void setup_pins()
 {
     /* Setup input pins. */
     
-    /* Enable GPIOA clock and set modes of PA1 and PA2 to input. */
+    /* Enable GPIOA clock and set modes of PA0 and PA1 to input. */
     RCC->AHBENR |= GPIOA_RCC_EN;
-    GPIOA->MODER &= ~(P1_MODE_INPUT | P2_MODE_INPUT);
+    GPIOA->MODER &= ~(P0_MODE_INPUT | P1_MODE_INPUT);
 
     /* Setup output pins. */
     
@@ -21,6 +21,8 @@ void setup_pins()
     GPIOC->BSRR |= (0x00FF << 16);
 }
 
+
+/* Sets up PA0 and PA1 as interrupt sources that trigger EXTI0 and EXTI1 interrupt handlers respectively. */
 void setup_interrupts()
 {
     /* Setup interrupt source via SYSCFG. */
@@ -30,5 +32,7 @@ void setup_interrupts()
     
     /* PA1 setup. */
     SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1);
+	
+	
     
 }
