@@ -1,7 +1,4 @@
-#include <stdint.h>
-#include "STM32L1xx.h"
 #include "setup.h"
-#include "timing_functions.h"
 
 
 /* Helper macro for mod function. */
