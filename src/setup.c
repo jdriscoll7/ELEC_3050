@@ -26,13 +26,19 @@ void setup_pins()
 void setup_interrupts()
 {
     /* Setup interrupt source via SYSCFG. */
+    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(0)) | EXTICRn_PA_EN(0); /* PA0. */
+    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1); /* PA1. */
+
+	/* Setup falling edge trigger for PA0 and PA1. */
     
-    /* PA0 setup. */
-    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(0)) | EXTICRn_PA_EN(0);
+    /* Unmask EXTI0 and EXTI1 interrupt using EXTI module. */
     
-    /* PA1 setup. */
-    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1);
-	
-	
+    /* Enable interrupt 0 and 1 in NVIC. */
+    NVIC_EnableIRQ(EXTI0_IRQn);    
+    NVIC_EnableIRQ(EXTI1_IRQn);
+    
+    /* Enable CPU interrupts. */
+    enable_irq();
+    
     
 }
