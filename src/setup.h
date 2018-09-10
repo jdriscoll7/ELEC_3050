@@ -34,6 +34,11 @@
 #define PA2_IDR ((uint16_t) (GPIOA->IDR & 0x04))
 
 
+/* GPIOC ODR for reading LED states. */
+#define PC8_ODR ((uint16_t) (GPIOC->ODR & 0x100))
+#define PC9_ODR ((uint16_t) (GPIOC->ODR & 0x200))
+
+
 /* Interrupt setup definitions. */
 #define SYSCFG_EXTICR1   (SYSCFG->EXTICR[0])
 #define EXTI_IMR         (EXTI->IMR)
