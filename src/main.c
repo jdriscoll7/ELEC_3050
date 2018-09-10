@@ -6,8 +6,12 @@
 
 
 /* Switch definitions. */
+
+/* Commented out for change in lab 4 specification. (interrupt driven) */
+/*
 #define SWITCH_1 (PA1_IDR)
 #define SWITCH_2 (PA2_IDR)
+*/
 
 
 /* Global variable for count. */
@@ -18,17 +22,24 @@ int8_t g_count2 = 0;
 /* Counts up for direction == 0 and down for direction == 1. */
 uint8_t counting(uint8_t direction)
 {
-    /* Count up or down respectively. */
-    if (direction == 0)
+    /* First count (PC[3:0]) always counts up. */
+    g_count = MOD(g_count + 1, 10);
+    
+    /* Only count when g_count is even. This caused second counter period to be
+       double period of first counter (2 * 0.5s = 1s). */
+    if ((g_count & 0x1) != 0)
     {
-        g_count = MOD(g_count + 1, 10);
-        g_count2 = MOD(g_count2 - 1, 10);
+        /* Count up or down respectively. */
+        if (direction == 0)
+        {
+            g_count2 = MOD(g_count2 + 1, 10);
+        }
+        else
+        {
+            g_count2 = MOD(g_count2 - 1, 10);
+        }    
     }
-    else
-    {
-        g_count = MOD(g_count - 1, 10);
-        g_count2 = MOD(g_count2 + 1, 10);
-    }
+    
     
     /* Write count to pins. */
     
@@ -49,12 +60,9 @@ int main()
     
     while (1)
     {   
-        /* Make sure switch is on. */
-        while (SWITCH_1 != 0)
-        {
-            /* Delay and count. */
-            delay();
-            counting(SWITCH_2);
-        }
+        /* Delay and count. */
+        delay();
+        counting(get_counting_direction());
     }
+    
 }
