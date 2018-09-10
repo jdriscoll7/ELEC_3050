@@ -25,6 +25,9 @@ void toggle_GPIO_bitfield(GPIO_TypeDef gpio, uint16_t bitfield)
        - Sets second counter to count down. */
 void EXTI0_IRQHandler(void)
 {
+    /* Toggle PC8 LED. */
+    toggle_GPIO_bitfield(GPIOC, ODR_PIN(8));
+       
     /* Clear EXTI pending register for interrupt source 0 (PA0). */
     EXTI_PR |= EXTI_PR_CLEAR(0);
 
@@ -39,7 +42,7 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
     /* Toggle PC9 LED. */
-    
+    toggle_GPIO_bitfield(GPIOC, ODR_PIN(9));
        
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
