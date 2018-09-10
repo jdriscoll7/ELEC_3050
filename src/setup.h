@@ -30,6 +30,7 @@
 #define SYSCFG_EXTICR1   (SYSCFG->EXTICR[0])
 #define EXTI0_IMR_MASK   0x01
 #define EXTI1_IMR_MASK   0x02
+#define EXTI_EDGE_EN(n)  (0x01 << (n))
 
 
 /* Hard-coded to setup specific pins. May be changed in future to allow parameters. */
