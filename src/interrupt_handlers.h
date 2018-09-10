@@ -10,6 +10,13 @@
 #define EXTI_PR          (EXTI->PR)
 
 
+/* Toggles a bitfield using BSRR.
+       - Inputs:
+           - GPIO_TypeDef gpio : The GPIO being considered.
+           - uint16_t bitfield : Bitfield where 1 bits are toggles. */
+void toggle_GPIO_bitfield(GPIO_TypeDef gpio, uint16_t bitfield);
+
+
 /* User push button interrupt handler.
        - Toggles PC8 (an LED).
        - Sets second counter to count down. */
