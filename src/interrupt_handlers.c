@@ -35,6 +35,9 @@ void EXTI0_IRQHandler(void)
     /* Toggle PC8 LED. */
     toggle_GPIO_bitfield(GPIOC, ODR_PIN(8));
        
+    /* Set count direction to down. */
+    count_direction = COUNT_DOWN;
+    
     /* Clear EXTI pending register for interrupt source 0 (PA0). */
     EXTI_PR |= EXTI_PR_CLEAR(0);
 
@@ -51,6 +54,9 @@ void EXTI1_IRQHandler(void)
     /* Toggle PC9 LED. */
     toggle_GPIO_bitfield(GPIOC, ODR_PIN(9));
        
+    /* Set count direction to up. */
+    count_direction = COUNT_UP;
+    
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
     
