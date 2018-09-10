@@ -18,7 +18,7 @@
 
 
 /* Variable used by main function that only interrupt handlers can access. */
-static uint8_t count_direction;
+static uint16_t count_direction;
 
 
 /* Provides read access to count_direction from external files. */
