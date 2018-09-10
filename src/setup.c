@@ -46,5 +46,5 @@ void setup_interrupts()
     NVIC_EnableIRQ(EXTI1_IRQn);
     
     /* Enable CPU interrupts. */
-    enable_irq();
+    __enable_irq();
 }

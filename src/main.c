@@ -62,7 +62,7 @@ int main()
     {   
         /* Delay and count. */
         delay();
-        counting(get_counting_direction());
+        counting(get_count_direction());
     }
     
 }
