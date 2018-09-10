@@ -43,7 +43,7 @@ uint8_t counting(uint8_t direction)
     
     /* Write count to pins. */
     
-    /* Set "on" bits and set "off" bits respectively. (temp variables are wasteful but easier to understand)*/
+    /* Set "on" bits and set "off" bits respectively. */
     uint32_t count_bitfield = (g_count & 0xF) | ((g_count ^ 0xF) << 16);
     uint32_t count2_bitfield = ((g_count2 & 0xF) << 4) | ((g_count2 ^ 0xF) << (16 + 4));
     
