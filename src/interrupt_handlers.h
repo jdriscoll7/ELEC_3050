@@ -9,6 +9,9 @@
 #define EXTI_PR_CLEAR(n) ((uint32_t) (0x1 << (n)))
 #define EXTI_PR (EXTI->PR)
 
+/* Count up/down definitions for counter. */
+#define COUNT_UP   ((uint16_t) 0x0)
+#define COUNT_DOWN ((uint16_t) 0x1)
 
 /* Definition for pins when used in ODR masking. */
 #define ODR_PIN(n) ((uint16_t) (0x1 << (n)))
