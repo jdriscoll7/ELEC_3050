@@ -31,7 +31,9 @@ void setup_interrupts()
 
 	/* Setup falling edge trigger for PA0 and PA1. */
     
+    
     /* Unmask EXTI0 and EXTI1 interrupt using EXTI module. */
+    
     
     /* Enable interrupt 0 and 1 in NVIC. */
     NVIC_EnableIRQ(EXTI0_IRQn);    
