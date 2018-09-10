@@ -19,10 +19,7 @@ static uint8_t count_direction;
 
 
 /* Provides read access to count_direction from external files. */
-uint8_t get_count_direction(void)
-{
-    return count_direction;
-}
+uint8_t get_count_direction(void);
 
 
 /* Toggles a bitfield using BSRR.
