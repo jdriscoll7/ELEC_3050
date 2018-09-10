@@ -7,7 +7,7 @@
 void EXTI0_IRQHandler(void)
 {
     /* Clear EXTI pending register for interrupt source 0 (PA0). */
-    EXTI->PR |= CLEAR_EXTI_PR(0);
+    EXTI_PR |= EXTI_PR_CLEAR(0);
 
     /* Clear pending interrupt signal. */
     NVIC_ClearPendingIRQ(EXTI0_IRQn);
@@ -20,7 +20,7 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
-    EXTI->PR |= CLEAR_EXTI_PR(1);
+    EXTI_PR |= EXTI_PR_CLEAR(1);
     
     /* Clear pending interrupt signal. */
     NVIC_ClearPendingIRQ(EXTI1_IRQn);

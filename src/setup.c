@@ -30,11 +30,11 @@ void setup_interrupts()
     SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1); /* PA1. */
 
     /* Setup falling edge trigger for PA0 and PA1. */
-    EXTI->FTSR = (EXTI->FTSR & ~EXTI_EDGE_EN(0)) | EXTI_EDGE_EN(0); /* PA0. */
-    EXTI->FTSR = (EXTI->FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1); /* PA1. */
+    EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(0)) | EXTI_EDGE_EN(0); /* PA0. */
+    EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1); /* PA1. */
     
     /* Unmask EXTI0 and EXTI1 interrupt using EXTI module. */
-    
+    EXTI_PR = EXTI_PR | EXTI_PR_CLEAR(0);
         
     /* Enable interrupt 0 and 1 in NVIC. */
     NVIC_EnableIRQ(EXTI0_IRQn);    
@@ -42,6 +42,4 @@ void setup_interrupts()
     
     /* Enable CPU interrupts. */
     enable_irq();
-    
-    
 }

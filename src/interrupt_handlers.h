@@ -6,7 +6,8 @@
 #include "STM32L1xx.h"
 
 
-#define CLEAR_EXTI_PR(n) ((uint32_t) (0x1 << (n)))
+#define EXTI_PR_CLEAR(n) ((uint32_t) (0x1 << (n)))
+#define EXTI_PR          (EXTI->PR)
 
 
 /* User push button interrupt handler.
