@@ -9,6 +9,7 @@
 #define EXTI_PR_CLEAR(n) ((uint32_t) (0x1 << (n)))
 #define EXTI_PR (EXTI->PR)
 
+
 /* Definition for pins when used in ODR masking. */
 #define ODR_PIN(n) ((uint16_t) (0x1 << (n)))
 
