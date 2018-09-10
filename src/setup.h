@@ -26,10 +26,9 @@
 
 /* Interrupt setup definitions. */
 
-#define SYSCFG_EXTICR1_PA(x)    ((uint16_t) (0xF << x))
-#define SYSCFG_EXTICR1_PA_EN(x) ((uint16_t) (0x0 << x))
-#define EXTI0_ENABLE_MASK ((uint32_t) 0x01)
-#define EXTI1_ENABLE_MASK ((uint32_t) 0x02)
+#define EXTICRn_PA(x)    ((uint32_t) (0xF << (4*(x))))
+#define EXTICRn_PA_EN(x) ((uint32_t) (0x0 << (4*(x))))
+#define SYSCFG_EXTICR1   (SYSCFG->EXTICR[0])
 
 
 /* Hard-coded to setup specific pins. May be changed in future to allow parameters. */

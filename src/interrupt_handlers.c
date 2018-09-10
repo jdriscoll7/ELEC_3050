@@ -1,5 +1,6 @@
 #include "interrupt_handlers.h"
 
+
 /* User push button interrupt handler.
        - Toggles PC8 (an LED).
        - Sets second counter to count down. */
@@ -7,7 +8,7 @@ void EXTI0_IRQHandler(void)
 {
 
     /* Clear pending interrupt signal. */
-    CLEAR_INTERRUPT(0);
+    NVIC_ClearPendingIRQ(EXTI0_IRQn);
 }
 
 
@@ -16,6 +17,6 @@ void EXTI0_IRQHandler(void)
        - Sets second counter to count up. */
 void EXTI1_IRQHandler(void)
 {
-    /* Clear pening interrupt signal. */
-    CLEAR_INTERRUPT(1);
+    /* Clear pending interrupt signal. */
+    NVIC_ClearPendingIRQ(EXTI1_IRQn);
 }

@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "setup.h"
 
 
@@ -24,5 +23,12 @@ void setup_pins()
 
 void setup_interrupts()
 {
+    /* Setup interrupt source via SYSCFG. */
+    
+    /* PA0 setup. */
+    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(0)) | EXTICRn_PA_EN(0);
+    
+    /* PA1 setup. */
+    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1);
     
 }
