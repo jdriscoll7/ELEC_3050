@@ -19,9 +19,9 @@
 
 
 /* Definitions for GPIOA input data registers. */
-#define PA0_IDR (GPIOA->IDR & 0x01)
-#define PA1_IDR (GPIOA->IDR & 0x02)
-#define PA2_IDR (GPIOA->IDR & 0x04)
+#define PA0_IDR ((uint16_t) (GPIOA->IDR & 0x01))
+#define PA1_IDR ((uint16_t) (GPIOA->IDR & 0x02))
+#define PA2_IDR ((uint16_t) (GPIOA->IDR & 0x04))
 
 
 /* Interrupt setup definitions. */
@@ -30,7 +30,8 @@
 #define SYSCFG_EXTICR1   (SYSCFG->EXTICR[0])
 #define EXTI0_IMR_MASK   0x01
 #define EXTI1_IMR_MASK   0x02
-#define EXTI_EDGE_EN(n)  (0x01 << (n))
+#define EXTI_EDGE_EN(n)  ((uint32_t) (0x01 << (n)))
+#define EXTI_PR_CLEAR(n) ((uint32_t) (0x1 << (n)))
 
 
 /* Hard-coded to setup specific pins. May be changed in future to allow parameters. */
