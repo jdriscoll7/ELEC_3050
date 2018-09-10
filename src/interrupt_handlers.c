@@ -17,7 +17,6 @@ void toggle_GPIO_bitfield(GPIO_TypeDef gpio, uint16_t bitfield)
            
     /* Write bsrr bitfield to bsrr of gpio input. */
     gpio->BSRR |= bsrr_bitfield;
-    
 }
 
 
