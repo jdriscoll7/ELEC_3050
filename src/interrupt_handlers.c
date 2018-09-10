@@ -7,7 +7,17 @@
            - uint16_t bitfield : Bitfield where 1 bits are toggles*/
 void toggle_GPIO_bitfield(GPIO_TypeDef gpio, uint16_t bitfield)
 {
-     
+    uint32_t bsrr_bitfield;
+    
+    /* Set zeros to ones. */
+    bsrr_bitfield |= ~(gpio->ODR) & bitfield;
+       
+    /* Set ones to zeros. */
+    bsrr_bitfield |= ((gpio->ODR & bitfield) << 16);
+           
+    /* Write bsrr bitfield to bsrr of gpio input. */
+    gpio->BSRR |= bsrr_bitfield;
+    
 }
 
 
