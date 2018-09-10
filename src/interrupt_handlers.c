@@ -11,7 +11,7 @@ uint8_t get_count_direction(void)
 /* Toggles a bitfield using BSRR.
        - Inputs:
            - GPIO_TypeDef gpio : The GPIO being considered.
-           - uint16_t bitfield : Bitfield where 1 bits are toggles*/
+           - uint16_t bitfield : Bitfield where 1 bits are toggles. */
 void toggle_GPIO_bitfield(GPIO_TypeDef gpio, uint16_t bitfield)
 {
     uint32_t bsrr_bitfield;
