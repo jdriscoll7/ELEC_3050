@@ -31,18 +31,10 @@ void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield)
        - Toggles PC8 (an LED).
        - Sets second counter to count down. */
 void EXTI0_IRQHandler(void)
-{
-    uint32_t count = 0;
-    
-    /* Do 160 thousand adds (based on trial and error). */
-    while (count < 160000)
-    {
-        count++;
-    }   
-    
+{ 
     /* Toggle PC8 LED. */
     toggle_GPIO_bitfield(GPIOC, ODR_PIN(8));
-       
+
     /* Set count direction to down. */
     count_direction = COUNT_DOWN;
     

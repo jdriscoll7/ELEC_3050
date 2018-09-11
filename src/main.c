@@ -58,7 +58,7 @@ int main()
 {
     setup_pins();
     setup_interrupts();
-    
+
     while (1)
     {   
         /* Delay and count. */
