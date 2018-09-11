@@ -14,7 +14,7 @@ uint8_t get_count_direction(void)
            - uint16_t bitfield : Bitfield where 1 bits are toggles. */
 void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield)
 {
-    uint32_t bsrr_bitfield;
+    uint32_t bsrr_bitfield = 0;
     
     /* Set zeros to ones. */
     bsrr_bitfield |= ~(gpio->ODR) & bitfield;
@@ -32,6 +32,14 @@ void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield)
        - Sets second counter to count down. */
 void EXTI0_IRQHandler(void)
 {
+    uint32_t count = 0;
+    
+    /* Do 160 thousand adds (based on trial and error). */
+    while (count < 160000)
+    {
+        count++;
+    }   
+    
     /* Toggle PC8 LED. */
     toggle_GPIO_bitfield(GPIOC, ODR_PIN(8));
        

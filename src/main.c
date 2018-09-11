@@ -57,6 +57,7 @@ uint8_t counting(uint8_t direction)
 int main()
 {
     setup_pins();
+    setup_interrupts();
     
     while (1)
     {   
