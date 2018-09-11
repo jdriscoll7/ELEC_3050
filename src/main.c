@@ -27,7 +27,7 @@ uint8_t counting(uint8_t direction)
     
     /* Only count when g_count is even. This caused second counter period to be
        double period of first counter (2 * 0.5s = 1s). */
-    if ((g_count & 0x1) != 0)
+    if ((g_count & 0x1) == 0)
     {
         /* Count up or down respectively. */
         if (direction == 0)
