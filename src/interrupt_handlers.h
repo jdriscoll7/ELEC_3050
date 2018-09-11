@@ -25,22 +25,15 @@ static uint16_t count_direction;
 uint8_t get_count_direction(void);
 
 
-/* Toggles a bitfield using BSRR.
-       - Inputs:
-           - GPIO_TypeDef gpio : The GPIO being considered.
-           - uint16_t bitfield : Bitfield where 1 bits are toggles. */
+/* Toggles a bitfield using BSRR.*/
 void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield);
 
 
-/* User push button interrupt handler.
-       - Toggles PC8 (an LED).
-       - Sets second counter to count down. */
+/* User push button interrupt handler. */
 void EXTI0_IRQHandler(void);
 
 
-/* Virtual switch interrupt handler. 
-       - Toggles PC9 (an LED).
-       - Sets second counter to count up. */
+/* Virtual switch interrupt handler. */
 void EXTI1_IRQHandler(void);
 
 
