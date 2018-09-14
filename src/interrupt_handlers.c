@@ -1,5 +1,4 @@
-/* 
-   - Name: interrupt_handlers.c 
+/* - Name: interrupt_handlers.c 
 
        - Description
            - Provides the implementation to the interrupt handlers and
