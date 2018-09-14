@@ -1,3 +1,14 @@
+/* 
+   - Name: interrupt_handlers.h 
+
+       - Description
+           - Provides various definitions and function declarations
+             used in interrupt handling.
+             
+       - Author: Joe Driscoll
+*/
+
+
 #ifndef INTERRUPT_HANDLERS_H
 #define INTERRUPT_HANDLERS_H
 
