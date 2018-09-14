@@ -1,3 +1,13 @@
+/* 
+   - Name: interrupt_handlers.c 
+
+       - Description
+           - Provides the implementation to the interrupt handlers and
+             some helper functions used by those handlers.
+             
+       - Author: Joe Driscoll
+*/
+
 #include "interrupt_handlers.h"
 
 
