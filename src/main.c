@@ -1,3 +1,12 @@
+/* - File: main.c
+
+       - Description
+           - Coordinates functionality in other files to meet specifications
+             for current lab.
+             
+       - Author: Joe Driscoll 
+*/
+
 #include "setup.h"
 
 
