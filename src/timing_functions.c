@@ -1,3 +1,12 @@
+/* - File: timing_functions.c 
+
+       - Description
+           - Provides timing functionality. Only in a separate file in
+             anticipation for using the clock in later projects.
+             
+       - Author: Joe Driscoll 
+*/
+
 #include <stdint.h>
 
 
