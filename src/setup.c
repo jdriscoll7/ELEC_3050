@@ -1,3 +1,13 @@
+/* - File: setup.c 
+
+       - Description
+           - Provides definitions and function declarations that make 
+             setting up essential parts of a project up, including pin and
+             interrupt definitions and functions, easier.
+             
+       - Author: Joe Driscoll 
+*/
+
 #include "setup.h"
 
 
