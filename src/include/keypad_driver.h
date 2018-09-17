@@ -50,6 +50,10 @@
 #define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
 
 
+/* Interrupt handler for the keypad device. */
+extern void EXTI0_IRQHandler(void);
+
+
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
 static void write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask);
 
