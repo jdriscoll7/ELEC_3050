@@ -41,7 +41,7 @@ void setup_interrupts(void);
 
 
 /* Setup keypad interface. */
-void setup_keypad_ports(void);
+void setup_keypad(void);
 
 
 #endif
