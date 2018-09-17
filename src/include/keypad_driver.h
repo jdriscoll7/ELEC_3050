@@ -29,15 +29,15 @@ typedef struct
     GPIO_TypeDef gpio;
     uint16_t (*read_keypress)(void);
     
-} keypad_device;   
+} *keypad_interface;   
 
 
 /* Reads the key pressed on the keypad and returns the number it represents. */
 uint16_t read_keypress(void);
 
 
-/* Function for creating a keypad interface */
-keypad_device *create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield);
+/* Function for creating a keypad interface. */
+keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield);
 
 
 /* Decode row-col pair to know what key was pressed. */
