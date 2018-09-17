@@ -27,6 +27,13 @@ static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint
 /* Reads the key pressed on the keypad and returns the number it represents. */
 uint16_t read_keypress(void)
 {
+    /* Iterate columns and read every row per interation. */
+    for(uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
+    {
+        
+    }
+    
+    
     /* Drive all columns low and read rows. (row number will be a 0) */
     write_to_odr(KEYPAD_GPIO, 0, COL_OFFSET, COL_BITFIELD);
     
