@@ -65,10 +65,7 @@
 
 
 /* Function for writing to a GPIO ODR. */
-void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask)
-{
-     gpio->BSRR |= ((value & bitmask) << shift) | ((value ^ bitmask) << (16 + shift));
-}
+void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
 
 /* Hard-coded to setup specific pins. May be changed in future to allow parameters. */
