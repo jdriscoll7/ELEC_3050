@@ -26,7 +26,9 @@
 #define ROW_OFFSET 4
 #define COL_OFFSET 0
 
-#define KEYPAD_GPIO GPIOC
+/* Interconnect-dependent definitions. */
+#define KEYPAD_GPIO         GPIOC
+#define KEYPAD_INPUT_DATA   (KEYPAD_GPIO->IDR & (ROW_BITFIELD | COL_BITFIELD))
 
 
 typedef struct
