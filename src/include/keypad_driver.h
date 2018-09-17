@@ -30,7 +30,7 @@
 
 
 /* Interconnect-dependent definitions. */
-#define KEYPAD_GPIO             GPIOC
+#define KEYPAD_GPIO             GPIOB
 #define KEYPAD_ROW_INPUT_DATA   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
 #define KEYPAD_COL_INPUT_DATA   (KEYPAD_GPIO->IDR & COL_BITFIELD)
 #define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
