@@ -17,6 +17,11 @@
 #include "pin_definitions.h"
 
 
+/* Define the GPIO that the keypad is on. */
+#define KEYPAD_GPIO  GPIOB
+#define KEYPAD_RCC   GPIOB_RCC
+
+
 #define KEYPAD_NUM_COLUMNS  4
 #define KEYPAD_NUM_ROWS     4
 
@@ -29,10 +34,6 @@
 #define COL_OFFSET 0
 
 
-/* Define the GPIO that the keypad is on. */
-#define KEYPAD_GPIO  GPIOB
-#define KEYPAD_RCC   GPIOB_RCC
-
 /* Columns are GPIO inputs. */
 #define KEYPAD_COL_MODER_SET    0x00
 #define KEYPAD_COL_MODER_CLR    0xFF
@@ -44,23 +45,9 @@
 
 
 /* Interconnect-dependent definitions. */
-#define KEYPAD_ROW_INPUT_DATA(gpio)   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
-#define KEYPAD_COL_INPUT_DATA(gpio)   (KEYPAD_GPIO->IDR & COL_BITFIELD)
-#define KEYPAD_INPUT_DATA(gpio)       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
-
-
-typedef struct
-{
-    uint16_t row_bitfield;
-    uint16_t col_bitfield;
-    GPIO_TypeDef gpio;
-    uint16_t (*read_keypress)(void);
-    
-} *keypad_interface;   
-
-
-/* Function for creating a keypad interface - only non-static function in file. */
-keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield);
+#define KEYPAD_ROW_INPUT_DATA   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
+#define KEYPAD_COL_INPUT_DATA   (KEYPAD_GPIO->IDR & COL_BITFIELD)
+#define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
