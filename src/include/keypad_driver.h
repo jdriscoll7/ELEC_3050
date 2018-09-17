@@ -32,6 +32,10 @@ typedef struct
 } *keypad_interface;   
 
 
+/* Helper function for writing a value to a GPIO's ODR using the BSRR. */
+void write_to_odr(GPIO_TypeDef gpio, uint16_t value);
+
+
 /* Reads the key pressed on the keypad and returns the number it represents. */
 uint16_t read_keypress(void);
 
