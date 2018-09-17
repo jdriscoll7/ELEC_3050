@@ -28,9 +28,10 @@ static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint
 uint16_t read_keypress(void)
 {
     /* Iterate columns and read every row per interation. */
-    for(uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
+    for (uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
-        
+        /* Drive column low. */
+        write_to_odr(KEYPAD_GPIO, 0x0, column, 0x1)
     }
     
     
