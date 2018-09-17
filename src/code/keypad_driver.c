@@ -12,7 +12,6 @@ keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield,
     new_keypad->col_bitfield = c_bitfield;
     
     return new_keypad;
-    
 }
 
 
