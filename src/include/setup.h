@@ -29,7 +29,8 @@
 
 
 /* Define the GPIO that the keypad is on. */
-#define KEYPAD_GPIO             GPIOB
+#define KEYPAD_GPIO  GPIOB
+#define KEYPAD_RCC   GPIOB_RCC
 
 /* Columns are GPIO inputs. */
 #define KEYPAD_COL_MODER_SET    0x00
