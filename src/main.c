@@ -14,15 +14,6 @@
 #define MOD(a, b) ((((a) % (b)) < 0) ? (((a) % (b)) + (b)) : ((a) % (b)))
 
 
-/* Switch definitions. */
-
-/* Commented out for change in lab 4 specification. (interrupt driven) */
-/*
-#define SWITCH_1 (PA1_IDR)
-#define SWITCH_2 (PA2_IDR)
-*/
-
-
 /* Global variable for count. */
 int8_t g_count = 0;
 int8_t g_count2 = 0;
