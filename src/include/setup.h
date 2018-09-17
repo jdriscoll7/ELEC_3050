@@ -21,8 +21,6 @@
 
 
 /* GPIO definitions. */
-#define GPIOA_MODER     (GPIOA->MODER)
-#define GPIOC_MODER     (GPIOC->MODER)
 #define PC70_DOUT_SET   (0x5555)            /* Bits to set for PC[7:0] MODER (output). */
 #define PC70_DOUT_CLR   (~0x0000AAAA)       /* Bits to clear for PC[7:0] MODER (output). */
 #define PC98_DOUT_SET   (0x05 << (2*8))     /* Bits to set for PC[9:8] MODER (output). */
