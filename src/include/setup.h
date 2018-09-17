@@ -28,19 +28,6 @@
 #define PC98_DOUT_CLR   (~(0x0A << (2*8)))  /* Bits to clear for PC[9:8] MODER (output). */
 
 
-/* Define the GPIO that the keypad is on. */
-#define KEYPAD_GPIO  GPIOB
-#define KEYPAD_RCC   GPIOB_RCC
-
-/* Columns are GPIO inputs. */
-#define KEYPAD_COL_MODER_SET    0x00
-#define KEYPAD_COL_MODER_CLR    0xFF
-
-/* Rows are GPIO outputs. */
-#define KEYPAD_ROW_MODER_SET    (0x55 << 4)
-#define KEYPAD_ROW_MODER_CLR    ~(0x000000AA << 4)
-
-
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
