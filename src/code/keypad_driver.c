@@ -2,19 +2,6 @@
 #include "stdlib.h"
 
 
-/* Function for creating a keypad interface. */
-keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield)
-{
-    keypad_interface new_keypad = malloc(sizeof(keypad_interface));
-    
-    new_keypad->gpio = gpio;
-    new_keypad->row_bitfield = r_bitfield;
-    new_keypad->col_bitfield = c_bitfield;
-    
-    return new_keypad;
-}
-
-
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
 static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask)
 {
