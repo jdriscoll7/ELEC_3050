@@ -29,7 +29,15 @@
 
 
 /* Define the GPIO that the keypad is on. */
-#define KEYPAD_GPIO GPIOB
+#define KEYPAD_GPIO             GPIOB
+
+/* Columns are GPIO inputs. */
+#define KEYPAD_COL_MODER_SET    0x00
+#define KEYPAD_COL_MODER_CLR    0xFF
+
+/* Rows are GPIO outputs. */
+#define KEYPAD_ROW_MODER_SET    (0x55 << 4)
+#define KEYPAD_ROW_MODER_CLR    (0xAA << 4)
 
 
 /* Function for writing to a GPIO ODR. */
