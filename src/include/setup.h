@@ -20,12 +20,6 @@
 #include <stdint.h>
 
 
-/* GPIOA and GPIOC clock enable definitions. */
-#define RCC_AHBENR   (RCC->AHBENR)
-#define GPIOA_RCC_EN 0x01
-#define GPIOC_RCC_EN 0x04
-
-
 /* GPIO definitions. */
 #define GPIOA_MODER     (GPIOA->MODER)
 #define GPIOC_MODER     (GPIOC->MODER)
