@@ -39,7 +39,7 @@ uint16_t read_keypress(keypad_interface keypad)
         for (uint8_t row = 0; row < KEYPAD_NUM_ROWS; row++)
         {
             uint16_t row_bit = (0x1 << (row + ROW_OFFSET));
-            uint16_t row_value = KEYPAD_ROW_INPUT_DATA(keypad->GPIO) & row_bit;
+            uint16_t row_value = KEYPAD_ROW_INPUT_DATA(keypad->gpio) & row_bit;
             
             if (row_value == 0)
             {
