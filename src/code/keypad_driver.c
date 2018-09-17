@@ -51,9 +51,8 @@ uint16_t read_keypress(void)
         }
     }
     
-    /* If function reaches here, then there was an error.  */
+    /* If function reaches here, then there was an error. Always output F to detect error on testing. */
     return 0xF
-    
 }
 
 
