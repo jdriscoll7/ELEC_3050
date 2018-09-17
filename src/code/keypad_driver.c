@@ -22,7 +22,14 @@ uint16_t read_keypress(void)
         /* Short delay - hopefully no optimization flags are on. (this is according to specification)*/
         for (int k = 0; k < 4; k++);
         
+        uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
+         
         /* Are any rows driven low? */
+        if (shifted_row_input_data != 0xF)
+        {
+            uint16_t row = (~(shifted_row_input_data) & 0xF);
+            return decode_row_col(row, column);
+        }
         
     }
     
