@@ -81,4 +81,8 @@ void setup_keypad(void)
     
     /* Set mode bits. */
     KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET);
+       
+    /* Make row pins default to high. */
+    KEYPAD_GPIO->PUPDR &= KEYPAD_PULLUP_RST;
+    KEYPAD_GPIO->PUPDR |= KEYPAD_PULLUP_SET;
 }
