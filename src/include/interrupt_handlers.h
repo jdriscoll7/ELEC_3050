@@ -14,6 +14,7 @@
 
 #include <stdint.h>
 #include "STM32L1xx.h"
+#include "pin_definitions.h"
 
 
 /* Count up/down definitions for counter. */
