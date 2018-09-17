@@ -12,6 +12,12 @@
 #define PIN_DEFINITIONS_H
 
 
+/* Some GPIO definitions. */
+#define GPIOA_MODER     (GPIOA->MODER)
+#define GPIOB_MODER     (GPIOB->MODER)
+#define GPIOC_MODER     (GPIOC->MODER)
+
+
 /* GPIO clock enable definitions. */
 #define RCC_AHBENR   (RCC->AHBENR)
 #define GPIOA_RCC_EN 0x01
