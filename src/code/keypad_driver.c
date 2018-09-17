@@ -27,7 +27,13 @@ uint16_t read_keypress(void)
         /* Are any rows driven low? */
         if (shifted_row_input_data != 0xF)
         {
+            /* 4-bit value with a zero in current column and ones in other (three) columns. */
             uint16_t row = (~(shifted_row_input_data) & 0xF);
+            
+            /* Reset all column values to low to allow interrupt retriggering. */
+            write_to_odr(0x0, 0x0, 0xF);
+             
+            /* Return correct decoding. */
             return decode_row_col(row, column);
         }
         
