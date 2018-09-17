@@ -31,7 +31,13 @@ uint16_t read_keypress(void)
     for (uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
-        write_to_odr(KEYPAD_GPIO, 0x0, column, 0x1)
+        write_to_odr(KEYPAD_GPIO, 0x0, column, 0x1);
+        
+        /* Read each row. */
+        for (uint8_t row = 0; row < KEYPAD_NUM_ROWS; row++)
+        {
+            
+        }
     }
     
     
