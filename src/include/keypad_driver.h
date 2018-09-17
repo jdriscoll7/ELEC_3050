@@ -61,6 +61,7 @@ static uint16_t key_pressed;
 
 bool check_key_pressed(void);
 uint16_t get_key_pressed(void);
+void clear_key_pressed_flag(void);
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */

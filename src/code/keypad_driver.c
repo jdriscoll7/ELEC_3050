@@ -87,3 +87,10 @@ uint16_t get_key_pressed(void)
 {
     return key_pressed;
 }
+
+
+/* Clear key_pressed_flag. */
+void clear_key_pressed_flag(void)
+{
+    key_pressed_flag = false;
+}

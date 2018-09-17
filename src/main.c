@@ -53,12 +53,20 @@ int main()
         
         counting(g_count);
         
+        /* Detect if keypad has been activated recently. */
+        if (check_key_pressed() == true)
+        {
+            clear_key_pressed_flag();
+            countdown_timer = KEYPAD_CYCLE_COUNT - 1;
+        }
+        
         /* If countdown timer is 0, then display count. If it isn't zero, 
            then it should be displaying a keypad character.*/
         if (countdown_timer == 0)
         {
             /* Write g_count to LED's. */
             write_to_odr(GPIOC, g_count, 0, 0x0F);
+            
         }
         else
         {
@@ -68,7 +76,5 @@ int main()
             /* Decrement countdown timer. */
             countdown_timer--;
         }
-        
-        
     }
 }
