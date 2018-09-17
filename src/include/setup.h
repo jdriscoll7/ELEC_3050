@@ -28,6 +28,11 @@
 #define PC98_DOUT_CLR   (~(0x0A << (2*8)))  /* Bits to clear for PC[9:8] MODER (output). */
 
 
+/* Pull-up/pull-down definitions. */
+#define KEYPAD_PULLUP_SET (0x55 << ROW_OFFSET)
+#define KEYPAD_PULLUP_RST (~(0xAA << ROW_OFFSET))
+
+
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
