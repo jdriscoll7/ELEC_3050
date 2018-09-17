@@ -26,6 +26,8 @@
 #define ROW_OFFSET 4
 #define ROW_OFFSET 0
 
+#define KEYPAD_GPIO GPIOC
+
 
 typedef struct
 {
