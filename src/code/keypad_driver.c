@@ -17,7 +17,7 @@ uint16_t read_keypress(void)
     for (uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
-        write_to_odr(0x0, column, 0x1);
+        write_to_odr(~(0x1 << column), 0x0, 0xF);
         
         /* Short delay - hopefully no optimization flags are on. (this is according to specification)*/
         for (int k = 0; k < 4; k++);
