@@ -43,7 +43,6 @@
 #define KEYPAD_ROW_MODER_CLR    ~(0x000000AA << 4)
 
 
-
 /* Interconnect-dependent definitions. */
 #define KEYPAD_ROW_INPUT_DATA   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
 #define KEYPAD_COL_INPUT_DATA   (KEYPAD_GPIO->IDR & COL_BITFIELD)
