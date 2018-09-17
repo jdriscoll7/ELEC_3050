@@ -13,11 +13,12 @@
 #define SETUP_H
 
 
+#include <stdint.h>
 #include "STM32L1xx.h"
 #include "timing_functions.h"
 #include "interrupt_handlers.h"
 #include "keypad_driver.h"
-#include <stdint.h>
+#include "pin_definitions.h"
 
 
 /* GPIO definitions. */
