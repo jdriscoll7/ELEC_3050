@@ -31,6 +31,7 @@
 /* Define the GPIO that the keypad is on. */
 #define KEYPAD_GPIO GPIOB
 
+
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
