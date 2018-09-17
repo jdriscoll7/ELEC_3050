@@ -23,15 +23,21 @@
 #define ROW_BITFIELD ((uint16_t) (0xF0))
 #define COL_BITFIELD ((uint16_t) (0x0F))
 
+
 #define ROW_OFFSET 4
 #define COL_OFFSET 0
 
+
 /* Interconnect-dependent definitions. */
-#define KEYPAD_GPIO         GPIOC
+#define KEYPAD_GPIO             GPIOC
 #define KEYPAD_ROW_INPUT_DATA   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
 #define KEYPAD_COL_INPUT_DATA   (KEYPAD_GPIO->IDR & COL_BITFIELD)
 #define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
 
+
+/* Definitions for setting up GPIO connections. */
+#define GPIOB_RCC_EN 0x02
+#define RCC_AHBENR
 
 typedef struct
 {
