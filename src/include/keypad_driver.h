@@ -19,8 +19,10 @@
 #define KEYPAD_NUM_COLUMNS  4
 #define KEYPAD_NUM_ROWS     4
 
+
 #define ROW_BITFIELD ((uint16_t) (0xF0))
 #define COL_BITFIELD ((uint16_t) (0x0F))
+
 
 typedef struct
 {
