@@ -14,7 +14,8 @@
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask)
 {
-     gpio->BSRR |= ((value & bitmask) << shift) | ((value ^ bitmask) << (16 + shift));
+     uint32_t masked_value = value & bitmask;
+     gpio->BSRR |= (masked_value << shift) | ((masked_value ^ bitmask) << (16 + shift));
 }
 
 
