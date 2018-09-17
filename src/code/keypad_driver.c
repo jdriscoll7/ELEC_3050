@@ -2,18 +2,6 @@
 #include "stdlib.h"
 
 
-/* Reads the key pressed on the keypad and returns the number it represents. */
-uint16_t read_keypress(void)
-{
-    /* Drive all columns low and read rows. (row number will be a 0) */
-    
-    /* Drive all rows low and read columns. (column number will be a 0) */
-    
-    /* Decode the row and column number to return output. */
-    
-}
-
-
 /* Function for creating a keypad interface. */
 keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield)
 {
@@ -24,6 +12,18 @@ keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield,
     new_keypad->col_bitfield = c_bitfield;
     
     return new_keypad;
+    
+}
+
+
+/* Reads the key pressed on the keypad and returns the number it represents. */
+uint16_t read_keypress(void)
+{
+    /* Drive all columns low and read rows. (row number will be a 0) */
+    
+    /* Drive all rows low and read columns. (column number will be a 0) */
+    
+    /* Decode the row and column number to return output. */
     
 }
 
