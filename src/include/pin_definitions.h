@@ -31,4 +31,21 @@
 #define EXTI_EDGE_EN(n)  ((uint32_t) (0x01 << (n)))
 
 
+/* Definitions for specific pin MODER modes. */
+#define P0_MODE_INPUT 0x00000003
+#define P1_MODE_INPUT 0x0000000C
+#define P2_MODE_INPUT 0x00000030
+
+
+/* Definitions for GPIOA input data registers. */
+#define PA0_IDR ((uint16_t) (GPIOA->IDR & 0x01))
+#define PA1_IDR ((uint16_t) (GPIOA->IDR & 0x02))
+#define PA2_IDR ((uint16_t) (GPIOA->IDR & 0x04))
+
+
+/* GPIOC ODR for reading LED states. */
+#define PC8_ODR ((uint16_t) (GPIOC->ODR & 0x100))
+#define PC9_ODR ((uint16_t) (GPIOC->ODR & 0x200))
+
+
 #endif
