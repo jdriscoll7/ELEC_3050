@@ -3,7 +3,7 @@
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
-static void write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask)
+static void keypad_write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask)
 {
      uint32_t masked_value = value & bitmask;
      KEYPAD_GPIO->BSRR |= (masked_value << shift) | ((masked_value ^ bitmask) << (16 + shift));
@@ -17,7 +17,7 @@ uint16_t read_keypress(void)
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
-        write_to_odr(~(0x1 << column), 0x0, 0xF);
+        keypad_write_to_odr(~(0x1 << column), 0x0, 0xF);
         
         /* Short delay - hopefully no optimization flags are on. (this is according to specification)*/
         for (int k = 0; k < 4; k++);
@@ -31,7 +31,7 @@ uint16_t read_keypress(void)
             uint16_t row = (~(shifted_row_input_data) & 0xF);
             
             /* Reset all column values to low to allow interrupt retriggering. */
-            write_to_odr(0x0, 0x0, 0xF);
+            keypad_write_to_odr(0x0, 0x0, 0xF);
              
             /* Return correct decoding. */
             return decode_row_col(row, column);

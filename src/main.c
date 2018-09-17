@@ -43,7 +43,7 @@ uint8_t counting(uint8_t direction)
     /* Write counts at same time - lots of casting for safety. */
        
     /* Combine counts. */
-    uint16_t combined_counts = ((uint16_t) g_count) + (((uint16_t) g_count2) << 4)
+    uint16_t combined_counts = ((uint16_t) g_count) + (((uint16_t) g_count2) << 4);
            
     /* Write combined counts to GPIOC ODR, with the count being offset by 0 and writing to lower 8 bits (0xFF). */
     write_to_odr(GPIOC, combined_counts, 0, 0xFF);
