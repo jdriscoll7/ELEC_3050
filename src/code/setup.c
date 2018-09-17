@@ -70,8 +70,7 @@ void setup_interrupts()
 
 /* Setup keypad interface. */
 void setup_keypad(void)
-{
-        
+{  
     /* Setup GPIOB clock. */
     RCC->AHBENR |= GPIOB_RCC_EN;
        
