@@ -23,6 +23,9 @@
 #define ROW_BITFIELD ((uint16_t) (0xF0))
 #define COL_BITFIELD ((uint16_t) (0x0F))
 
+#define ROW_OFFSET 4
+#define ROW_OFFSET 0
+
 
 typedef struct
 {
