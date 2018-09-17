@@ -46,7 +46,7 @@ uint16_t read_keypress(void)
             
             if (row_value == 0)
             {
-                return decode_row_col
+                return decode_row_col(row + 1, col + 1);
             }
         }
     }
