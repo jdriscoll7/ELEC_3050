@@ -39,7 +39,7 @@ keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield,
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
-static void write_to_odr(GPIO_TypeDef gpio, uint16_t value);
+static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t bitmask);
 
 
 /* Reads the key pressed on the keypad and returns the number it represents. */
