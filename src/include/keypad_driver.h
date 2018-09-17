@@ -24,7 +24,7 @@
 #define COL_BITFIELD ((uint16_t) (0x0F))
 
 #define ROW_OFFSET 4
-#define ROW_OFFSET 0
+#define COL_OFFSET 0
 
 #define KEYPAD_GPIO GPIOC
 
