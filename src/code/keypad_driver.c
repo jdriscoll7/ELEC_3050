@@ -57,3 +57,33 @@ uint16_t decode_row_col(uint16_t row, uint16_t col)
         return col + 3 * (row - 1);
     }    
 }
+
+
+
+/* Interrupt handler for keypad interrupt. */
+void EXTI1_IRQHandler(void)
+{
+    /* Set pressed flag and the key pressed. */
+    key_pressed = read_keypress();
+    key_pressed_flag = true;
+    
+    /* Clear EXTI pending register for interrupt source 1 (PA1). */
+    EXTI_PR |= EXTI_PR_CLEAR(1);
+
+    /* Clear pending interrupt signal. */
+    NVIC_ClearPendingIRQ(EXTI1_IRQn);
+}
+
+
+/* Check for key pressed. */
+bool check_key_pressed(void)
+{
+    return key_pressed_flag;
+}
+
+
+/* Return the key pressed. */
+uint16_t get_key_pressed(void)
+{
+    return key_pressed;
+}

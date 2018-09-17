@@ -13,6 +13,7 @@
 
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "STM32L1xx.h"
 #include "pin_definitions.h"
 
@@ -50,7 +51,16 @@
 
 
 /* Interrupt handler for the keypad device. */
-extern void EXTI0_IRQHandler(void);
+void EXTI0_IRQHandler(void);
+
+
+/* Allow access to this file to see if a key has been pressed. */
+static bool key_pressed_flag = false;
+static uint16_t key_pressed;
+
+
+bool check_key_pressed(void);
+uint16_t get_key_pressed(void);
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */

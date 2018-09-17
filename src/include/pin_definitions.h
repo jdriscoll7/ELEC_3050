@@ -34,6 +34,11 @@
 #define GPIOC_RCC_EN 0x04
 
 
+/* Count up/down definitions for counter. */
+#define COUNT_UP   ((uint16_t) 0x0)
+#define COUNT_DOWN ((uint16_t) 0x1)
+
+
 /* Interrupt setup definitions. */
 #define SYSCFG_EXTICR1   (SYSCFG->EXTICR[0])
 #define EXTI_IMR         (EXTI->IMR)

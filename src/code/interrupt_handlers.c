@@ -8,6 +8,7 @@
 */
 
 #include "interrupt_handlers.h"
+#include "keypad_driver.h"
 
 
 /* Provides read access to count_direction from external files. */
@@ -52,23 +53,4 @@ void EXTI0_IRQHandler(void)
 
     /* Clear pending interrupt signal. */
     NVIC_ClearPendingIRQ(EXTI0_IRQn);
-}
-
-
-/* Virtual switch interrupt handler. 
-       - Toggles PC9 (an LED).
-       - Sets second counter to count up. */
-void EXTI1_IRQHandler(void)
-{
-    /* Toggle PC9 LED. */
-    toggle_GPIO_bitfield(GPIOC, ODR_PIN(9));
-       
-    /* Set count direction to up. */
-    count_direction = COUNT_UP;
-    
-    /* Clear EXTI pending register for interrupt source 1 (PA1). */
-    EXTI_PR |= EXTI_PR_CLEAR(1);
-    
-    /* Clear pending interrupt signal. */
-    NVIC_ClearPendingIRQ(EXTI1_IRQn);
 }
