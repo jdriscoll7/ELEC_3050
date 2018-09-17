@@ -54,7 +54,7 @@ static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint
 
 
 /* Reads the key pressed on the keypad and returns the number it represents. */
-static uint16_t read_keypress(GPIO_TypeDef gpio);
+static uint16_t read_keypress(keypad_interface keypad);
 
 
 /* Decode row-col pair to know what key was pressed. */
