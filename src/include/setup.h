@@ -37,7 +37,7 @@
 
 /* Rows are GPIO outputs. */
 #define KEYPAD_ROW_MODER_SET    (0x55 << 4)
-#define KEYPAD_ROW_MODER_CLR    (0xAA << 4)
+#define KEYPAD_ROW_MODER_CLR    ~(0x000000AA << 4)
 
 
 /* Function for writing to a GPIO ODR. */
