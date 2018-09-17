@@ -40,15 +40,13 @@ uint8_t counting(uint8_t direction)
         }    
     }
     
-    
-    /* Write count to pins. */
-    
-    /* Set "on" bits and set "off" bits respectively. */
-    uint32_t count_bitfield = (g_count & 0xF) | ((g_count ^ 0xF) << 16);
-    uint32_t count2_bitfield = ((g_count2 & 0xF) << 4) | ((g_count2 ^ 0xF) << (16 + 4));
-    
-    /* Write counts at same time. */
-    GPIOC->BSRR = count_bitfield | count2_bitfield;
+    /* Write counts at same time - lots of casting for safety. */
+       
+    /* Combine counts. */
+    uint16_t combined_counts = ((uint16_t) g_count) + (((uint16_t) g_count2) << 4)
+           
+    /* Write combined counts to GPIOC ODR, with the count being offset by 0 and writing to lower 8 bits (0xFF). */
+    write_to_odr(GPIOC, combined_counts, 0, 0xFF);
     
     return g_count;
 }
