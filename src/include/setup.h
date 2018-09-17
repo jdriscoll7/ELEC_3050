@@ -40,4 +40,8 @@ void setup_pins(void);
 void setup_interrupts(void);
 
 
+/* Setup keypad interface. */
+void setup_keypad_ports(void);
+
+
 #endif
