@@ -36,7 +36,6 @@ uint16_t read_keypress(void)
             /* Return correct decoding. */
             return decode_row_col(row, column);
         }
-        
     }
     
     /* If function reaches here, then there was an error. Always output F to detect error on testing. */
