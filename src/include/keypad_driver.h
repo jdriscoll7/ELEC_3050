@@ -29,6 +29,20 @@
 #define COL_OFFSET 0
 
 
+/* Define the GPIO that the keypad is on. */
+#define KEYPAD_GPIO  GPIOB
+#define KEYPAD_RCC   GPIOB_RCC
+
+/* Columns are GPIO inputs. */
+#define KEYPAD_COL_MODER_SET    0x00
+#define KEYPAD_COL_MODER_CLR    0xFF
+
+/* Rows are GPIO outputs. */
+#define KEYPAD_ROW_MODER_SET    (0x55 << 4)
+#define KEYPAD_ROW_MODER_CLR    ~(0x000000AA << 4)
+
+
+
 /* Interconnect-dependent definitions. */
 #define KEYPAD_ROW_INPUT_DATA(gpio)   (KEYPAD_GPIO->IDR & ROW_BITFIELD)
 #define KEYPAD_COL_INPUT_DATA(gpio)   (KEYPAD_GPIO->IDR & COL_BITFIELD)
