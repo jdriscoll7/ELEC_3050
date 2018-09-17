@@ -50,6 +50,10 @@ typedef struct
 keypad_interface create_keypad_interface(GPIO_TypeDef gpio, uint16_t r_bitfield, uint16_t c_bitfield);
 
 
+/* Function for initializing GPIO and its relevant ports. */
+void setup_keypad_ports(keypad_interface keypad);
+
+
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
 static void write_to_odr(GPIO_TypeDef gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
