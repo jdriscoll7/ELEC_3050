@@ -35,10 +35,6 @@
 #define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
 
 
-/* Definitions for setting up GPIO connections. */
-#define GPIOB_RCC_EN 0x02
-#define RCC_AHBENR
-
 typedef struct
 {
     uint16_t row_bitfield;
