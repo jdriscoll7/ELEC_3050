@@ -14,7 +14,7 @@ static void write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask)
 uint16_t read_keypress(void)
 {
     /* Iterate columns and read every row per interation. */
-    for (uint8_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
+    for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
         write_to_odr(~(0x1 << column), 0x0, 0xF);
