@@ -66,3 +66,16 @@ void setup_interrupts()
     /* Enable CPU interrupts. */
     __enable_irq();
 }
+
+
+/* Setup keypad interface. */
+void setup_keypad_ports(void)
+{
+    /* Setup GPIOB moder. */
+    
+    /* Clear mode bits. */
+    KEYPAD_GPIO->MODER &= (KEYPAD_ROW_MODER_CLR | KEYPAD_COL_MODER_CLR);
+    
+    /* Set mode bits. */
+    KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET);
+}
