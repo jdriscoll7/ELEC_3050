@@ -69,7 +69,7 @@ void setup_interrupts()
 
 
 /* Setup keypad interface. */
-void setup_keypad_ports(void)
+void setup_keypad(void)
 {
         
     /* Setup GPIOB clock. */
