@@ -3,10 +3,9 @@
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
-static void keypad_write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask)
+static void keypad_write_to_odr(uint16_t value, uint16_t bitmask)
 {
-     uint32_t masked_value = value & bitmask;
-     KEYPAD_GPIO->BSRR |= (masked_value << shift) | ((masked_value ^ bitmask) << (16 + shift));
+     KEYPAD_GPIO->BSRR |= (value & bitmask) | (((value & bitmask) ^ bitmask) << 16);
 }
 
 
@@ -17,10 +16,7 @@ uint16_t read_keypress(void)
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
-        keypad_write_to_odr(~(0x1 << column), 0x0, 0xF);
-        
-        /* Short delay - hopefully no optimization flags are on. (this is according to specification)*/
-        for (int k = 0; k < 4; k++);
+        keypad_write_to_odr(~(0x1 << column), 0xF);
         
         uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
          
@@ -28,13 +24,22 @@ uint16_t read_keypress(void)
         if (shifted_row_input_data != 0xF)
         {
             /* 4-bit value with a zero in current column and ones in other (three) columns. */
-            uint16_t row = (~(shifted_row_input_data) & 0xF);
+            uint16_t row_data = (~(shifted_row_input_data) & 0xF) / 2;
+            
+            uint16_t row = 0;
+            
+            /* Find index of row that is a zero. */
+            while (row_data > 0)
+            {
+                row_data = (row_data >> 1);
+                row++;
+            }
             
             /* Reset all column values to low to allow interrupt retriggering. */
-            keypad_write_to_odr(0x0, 0x0, 0xF);
+            keypad_write_to_odr(0x0, 0xF);
              
             /* Return correct decoding. */
-            return decode_row_col(row, column + 1);
+            return decode_row_col(row + 1, column + 1);
         }
     }
     
@@ -52,9 +57,14 @@ uint16_t decode_row_col(uint16_t row, uint16_t col)
     {
         return 0xA + (row - 1);
     }
+    else if (row == 4 && (col == 3 || col == 1))
+    {
+        /* Always return 0xF for special characters. */
+        return 0xF;
+    }
     else
     {
-        return col + 3 * (row - 1);
+        return MOD(col + 3 * (row - 1), 10);
     }    
 }
 

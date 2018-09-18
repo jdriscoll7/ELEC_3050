@@ -56,7 +56,7 @@ void clear_key_pressed_flag(void);
 
 
 /* Helper function for writing a value to a GPIO's ODR using the BSRR. */
-static void keypad_write_to_odr(uint16_t value, uint16_t shift, uint16_t bitmask);
+static void keypad_write_to_odr(uint16_t value, uint16_t bitmask);
 
 
 /* Reads the key pressed on the keypad and returns the number it represents. */

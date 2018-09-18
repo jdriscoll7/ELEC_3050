@@ -12,6 +12,14 @@
 #define PIN_DEFINITIONS_H
 
 
+/* Helper macro for mod function. */
+#define MOD(a, b) ((((a) % (b)) < 0) ? (((a) % (b)) + (b)) : ((a) % (b)))
+
+
+/* Helper macro for max function. */
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
+
 /* Definition for pins when used in ODR masking. */
 #define ODR_PIN(n) ((uint16_t) (0x1 << (n)))
 

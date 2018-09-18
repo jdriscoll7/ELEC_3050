@@ -10,14 +10,6 @@
 #include "setup.h"
 
 
-/* Helper macro for mod function. */
-#define MOD(a, b) ((((a) % (b)) < 0) ? (((a) % (b)) + (b)) : ((a) % (b)))
-
-
-/* Helper macro for max function. */
-#define MAX(a, b) (((a) > (b)) ? (a) : (b))
-
-
 /* Number of times cycles until count shows (after keypad press). */
 #define KEYPAD_CYCLE_COUNT 5
 
