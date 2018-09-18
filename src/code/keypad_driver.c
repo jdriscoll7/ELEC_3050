@@ -39,7 +39,7 @@ static uint16_t read_keypress(void)
             keypad_write_to_odr(0x0, 0xF);
              
             /* Return correct decoding. */
-            return decode_row_col(row + 1, column + 1);
+            return decode_row_col(row, column);
         }
     }
     
