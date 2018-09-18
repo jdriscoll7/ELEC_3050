@@ -16,8 +16,8 @@ static uint16_t read_keypress(void)
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
-        keypad_write_to_odr(~(0x1 << column), 0xF);
-        
+        keypad_write_to_odr(~(0x1 << (column + COL_OFFSET)), 0xF0);
+			
         uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
          
         /* Are any rows driven low? */
@@ -27,24 +27,24 @@ static uint16_t read_keypress(void)
             uint16_t row_data = (~(shifted_row_input_data) & 0xF) / 2;
             
             uint16_t row = 0;
-            
+          
             /* Find index of row that is a zero. */
             while (row_data > 0)
             {
                 row_data = (row_data >> 1);
                 row++;
             }
-            
-            /* Reset all column values to low to allow interrupt retriggering. */
-            keypad_write_to_odr(0x0, 0xF);
              
             /* Return correct decoding. */
             return decode_row_col(row, column);
         }
     }
     
+		/* Reset all column values to low to allow interrupt retriggering. */
+		keypad_write_to_odr(0x0, 0xF0);
+		
     /* If function reaches here, then there was an error. Always output F to detect error on testing. */
-    return 0xF;
+    return key_pressed;
 }
 
 
