@@ -10,7 +10,7 @@ static void keypad_write_to_odr(uint16_t value, uint16_t bitmask)
 
 
 /* Reads the key pressed on the keypad and returns the number it represents. */
-uint16_t read_keypress(void)
+static uint16_t read_keypress(void)
 {
     /* Iterate columns and read every row per interation. */
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
@@ -50,24 +50,9 @@ uint16_t read_keypress(void)
 
 /* Decode row-col pair to know what key was pressed. 
        - Note: Does not work with pound or asterisk keys. */
-uint16_t decode_row_col(uint16_t row, uint16_t col)
-{   
-    uint16_t lookuptable
-     
-    /* Is the key a letter? */
-    if (col == 4)
-    {
-        return 0xA + (row - 1);
-    }
-    else if (row == 4 && (col == 3 || col == 1))
-    {
-        /* Always return 0xF for special characters. */
-        return 0xF;
-    }
-    else
-    {
-        return MOD(col + 3 * (row - 1), 10);
-    }    
+static uint16_t decode_row_col(uint16_t row, uint16_t col)
+{    
+    return keypad_decode_table[row - 1][col - 1];
 }
 
 
