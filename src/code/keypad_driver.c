@@ -52,6 +52,8 @@ uint16_t read_keypress(void)
        - Note: Does not work with pound or asterisk keys. */
 uint16_t decode_row_col(uint16_t row, uint16_t col)
 {   
+    uint16_t lookuptable
+     
     /* Is the key a letter? */
     if (col == 4)
     {
