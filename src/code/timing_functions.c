@@ -14,7 +14,7 @@
 void delay(double seconds)
 {
     uint32_t count = 0;
-    uint32_t range = 160000 * 2 * seconds; 
+    uint32_t range = 262000 * 2 * seconds; 
     
     /* Do 160 thousand adds (based on trial and error). */
     while (count < range)
