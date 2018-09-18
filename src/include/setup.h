@@ -29,18 +29,18 @@
 
 
 /* Pull-up/pull-down definitions. */
-#define KEYPAD_PULLUP_SET (0x5500)
-#define KEYPAD_PULLUP_RST (~(0xAA00))
+#define KEYPAD_PULLUP_SET (0x0055)
+#define KEYPAD_PULLUP_RST (~(0x00AA))
 
 
 /* Columns are GPIO inputs. */
-#define KEYPAD_COL_MODER_SET    0x55
-#define KEYPAD_COL_MODER_CLR    ~(0x000000FF)
+#define KEYPAD_ROW_MODER_SET    0x00
+#define KEYPAD_ROW_MODER_CLR    ~(0x000000FF)
 
 
 /* Rows are GPIO outputs. */
-#define KEYPAD_ROW_MODER_SET    (0x00 << (2*4))
-#define KEYPAD_ROW_MODER_CLR    ~(0x000000FF << (2*4))
+#define KEYPAD_COL_MODER_SET    (0x55 << (2*4))
+#define KEYPAD_COL_MODER_CLR    ~(0x000000FF << (2*4))
 
 
 /* Function for writing to a GPIO ODR. */
