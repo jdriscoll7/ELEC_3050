@@ -29,8 +29,8 @@
 
 
 /* Pull-up/pull-down definitions. */
-#define KEYPAD_PULLUP_SET (0x5555)
-#define KEYPAD_PULLUP_RST (~(0xAAAA))
+#define KEYPAD_PULLUP_SET (0x5500)
+#define KEYPAD_PULLUP_RST (~(0xAA00))
 
 
 /* Columns are GPIO inputs. */
