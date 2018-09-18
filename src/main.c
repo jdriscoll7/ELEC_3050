@@ -58,7 +58,6 @@ int main()
         {
             /* Write g_count to LED's. */
             write_to_odr(GPIOC, g_count, 0, 0x0F);
-            
         }
         else
         {
