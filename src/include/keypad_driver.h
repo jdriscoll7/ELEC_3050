@@ -45,6 +45,13 @@
 void EXTI0_IRQHandler(void);
 
 
+/* Lookup table for keypad. */
+const uint16_t keypad_decode_table[KEYPAD_NUM_ROWS][KEYPAD_NUM_COLUMNS] = {{0x1, 0x2, 0x3, 0xA},
+                                                                           {0x4, 0x5, 0x6, 0xB},
+                                                                           {0x7, 0x8, 0x9, 0xC},
+                                                                           {0xF, 0x0, 0xE, 0xD}};
+
+
 /* Allow access to this file to see if a key has been pressed. */
 static bool key_pressed_flag = false;
 static uint16_t key_pressed;
