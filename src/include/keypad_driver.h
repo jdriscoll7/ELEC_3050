@@ -27,12 +27,12 @@
 #define KEYPAD_NUM_ROWS     4
 
 
-#define ROW_BITFIELD ((uint16_t) (0xF0))
-#define COL_BITFIELD ((uint16_t) (0x0F))
+#define ROW_BITFIELD ((uint16_t) (0x0F))
+#define COL_BITFIELD ((uint16_t) (0xF0))
 
 
-#define ROW_OFFSET 4
-#define COL_OFFSET 0
+#define ROW_OFFSET 0
+#define COL_OFFSET 4
 
 
 /* Interconnect-dependent definitions. */
@@ -46,7 +46,7 @@ void EXTI0_IRQHandler(void);
 
 
 /* Lookup table for keypad. */
-const uint16_t keypad_decode_table[KEYPAD_NUM_ROWS][KEYPAD_NUM_COLUMNS] = {{0x1, 0x2, 0x3, 0xA},
+static const uint16_t keypad_decode_table[KEYPAD_NUM_ROWS][KEYPAD_NUM_COLUMNS] = {{0x1, 0x2, 0x3, 0xA},
                                                                            {0x4, 0x5, 0x6, 0xB},
                                                                            {0x7, 0x8, 0x9, 0xC},
                                                                            {0xF, 0x0, 0xE, 0xD}};
