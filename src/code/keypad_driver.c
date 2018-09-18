@@ -52,7 +52,7 @@ static uint16_t read_keypress(void)
        - Note: Does not work with pound or asterisk keys. */
 static uint16_t decode_row_col(uint16_t row, uint16_t col)
 {    
-    return keypad_decode_table[row - 1][col - 1];
+    return keypad_decode_table[row][col];
 }
 
 
