@@ -22,20 +22,36 @@
 #define DEFAULT_AUTO_RELOAD ((uint16_t) 99)
 
 
-/* Enable interrupts for TIM10. */
-static void enable_TIM10(void);
+#define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
+
+
+/* Global variable for timer values. */
+static int8_t g_time_ones   = 0;
+static int8_t g_time_tenths = 0;
+
+
+/* Clear timer global variables. */
+void clear_timer_globals(void);
 
 
 /* Configure timer settings. */
 void configure_timer(TIM_TypeDef *timer, uint16_t prescale, uint16_t auto_reload);
 
 
+/* Enable counting on timer. */
+void enable_TIM10(void);
+
+
 /* Disable counting on timer. */
 void disable_TIM10(void);
 
 
+/* Toggle TIM10 on/off. */
+void toggle_enable_TIM10(void);
+
+
 /* Initialize timer. */
-void setup_timer(void);
+void setup_TIM10(void);
 
 
 /* Delays for x seconds by doing meaningless adds. */

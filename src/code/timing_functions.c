@@ -11,17 +11,11 @@
 #include "timing_functions.h"
 
 
-/* Sets up clocks and interrupts for TIM10. */
-static void enable_TIM10(void)
+/* Clear timer global variables. */
+void clear_timer_globals(void)
 {
-    /* Enable TIM10 clock on RCC. */
-    RCC->APB2ENR |= RCC_APB2ENR_TIM10EN;
-    
-    /* Enable TIM10 interrupt source in NVIC. */
-    NVIC_EnableIRQ(TIM10_IRQn);
-    
-    /* Make TIM10 generate interrupts. */
-    TIM10->DIER |= TIM_DIER_UIE;
+    g_time_ones = 0;
+    g_time_tenths = 0;
 }
 
 
@@ -29,6 +23,28 @@ static void enable_TIM10(void)
 void disable_TIM10(void)
 {
     TIM10->CR1 &= ~TIM_CR1_CEN;
+}
+
+
+/* Enable counting on timer. */
+void enable_TIM10(void)
+{
+    TIM10->CR1 |= TIM_CR1_CEN;
+}
+
+
+/* Toggle TIM10 on/off. */
+void toggle_enable_TIM10(void)
+{
+    /* If on, turn off and vice versa. */
+    if (TIMER_ON_OR_OFF != 0)
+    {
+        disable_TIM10();
+    }
+    else
+    {
+        enable_TIM10();
+    }
 }
 
 
@@ -41,13 +57,22 @@ void configure_timer(TIM_TypeDef *timer, uint16_t prescale, uint16_t auto_reload
 
 
 /* Initialize timer. */
-void setup_timer(void)
+void setup_TIM10(void)
 {
+    /* Enable TIM10 clock on RCC. */
+    RCC->APB2ENR |= RCC_APB2ENR_TIM10EN;
+    
+    /* Enable TIM10 interrupt source in NVIC. */
+    NVIC_EnableIRQ(TIM10_IRQn);
+    
+    /* Make TIM10 generate interrupts. */
+    TIM10->DIER |= TIM_DIER_UIE;
+    
     /* Configure timer to default settings. */
     configure_timer(TIM10, DEFAULT_PRESCALE, DEFAULT_AUTO_RELOAD);
     
-    /* Make timer begin counting. */
-    TIM10->CR1 |= TIM_CR1_CEN;
+    /* Timer initially off. */
+    disable_TIM10();
 }
 
 
@@ -68,6 +93,15 @@ void delay(double seconds)
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
+    /* Increment ones place if tenth's place rolls over. */
+    if (g_time_tenths == 9)
+    {
+        g_time_ones = MOD(g_time_ones + 1, 10);
+    }
+    
+    /* First count (PC[3:0]) is tenth of a second base. */
+    g_time_tenths = MOD(g_time_tenths + 1, 10);
+    
     /* Clear all interrupt request pending registers. */
     NVIC_ClearPendingIRQ(TIM10_IRQn);
     TIM10->SR &= ~0x1;

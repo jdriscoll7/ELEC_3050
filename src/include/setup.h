@@ -28,6 +28,9 @@
 #define PC98_DOUT_CLR   (~(0x0A << (2*8)))  /* Bits to clear for PC[9:8] MODER (output). */
 
 
+#define NO_SHIFT 0
+
+
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef *gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
