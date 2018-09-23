@@ -41,17 +41,32 @@
 #define KEYPAD_INPUT_DATA       (KEYPAD_COL_INPUT_DATA | KEYPAD_ROW_INPUT_DATA)
 
 
+/* Pull-up/pull-down definitions. */
+#define KEYPAD_PULLUP_SET (0x0055)
+#define KEYPAD_PULLUP_RST (~(0x00AA))
+
+
+/* Columns are GPIO inputs. */
+#define KEYPAD_ROW_MODER_SET    0x00
+#define KEYPAD_ROW_MODER_CLR    ~(0x000000FF)
+
+
+/* Rows are GPIO outputs. */
+#define KEYPAD_COL_MODER_SET    (0x55 << (2*4))
+#define KEYPAD_COL_MODER_CLR    ~(0x000000FF << (2*4))
+
+
 /* Interrupt handler for the keypad device. */
 void EXTI0_IRQHandler(void);
 
 
 /* Lookup table for keypad. */
 static const uint16_t keypad_decode_table[KEYPAD_NUM_ROWS][KEYPAD_NUM_COLUMNS] = {{0x1, 0x2, 0x3, 0xA},
-                                                                           {0x4, 0x5, 0x6, 0xB},
-                                                                           {0x7, 0x8, 0x9, 0xC},
-                                                                           {0xF, 0x0, 0xE, 0xD}};
+                                                                                  {0x4, 0x5, 0x6, 0xB},
+                                                                                  {0x7, 0x8, 0x9, 0xC},
+                                                                                  {0xF, 0x0, 0xE, 0xD}};
 
-
+                                                                                  
 /* Allow access to this file to see if a key has been pressed. */
 static bool key_pressed_flag = false;
 static uint16_t key_pressed;
@@ -72,6 +87,10 @@ static uint16_t read_keypress(void);
 
 /* Decode row-col pair to know what key was pressed. */
 static uint16_t decode_row_col(uint16_t row, uint16_t col);
+
+
+/* Keypad setup. */
+void setup_keypad(void);
 
 
 #endif

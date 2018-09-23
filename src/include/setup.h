@@ -28,21 +28,6 @@
 #define PC98_DOUT_CLR   (~(0x0A << (2*8)))  /* Bits to clear for PC[9:8] MODER (output). */
 
 
-/* Pull-up/pull-down definitions. */
-#define KEYPAD_PULLUP_SET (0x0055)
-#define KEYPAD_PULLUP_RST (~(0x00AA))
-
-
-/* Columns are GPIO inputs. */
-#define KEYPAD_ROW_MODER_SET    0x00
-#define KEYPAD_ROW_MODER_CLR    ~(0x000000FF)
-
-
-/* Rows are GPIO outputs. */
-#define KEYPAD_COL_MODER_SET    (0x55 << (2*4))
-#define KEYPAD_COL_MODER_CLR    ~(0x000000FF << (2*4))
-
-
 /* Function for writing to a GPIO ODR. */
 void write_to_odr(GPIO_TypeDef *gpio, uint16_t value, uint16_t shift, uint16_t bitmask);
 
@@ -53,10 +38,6 @@ void setup_pins(void);
 
 /* Sets up PA0 and PA1 as interrupts. */
 void setup_interrupts(void);
-
-
-/* Setup keypad interface. */
-void setup_keypad(void);
 
 
 #endif

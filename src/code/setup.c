@@ -22,6 +22,11 @@ void write_to_odr(GPIO_TypeDef *gpio, uint16_t value, uint16_t shift, uint16_t b
 /* A large function that just sets up a few different pins for basic operation. */
 void setup_pins()
 {
+    /* Turn on HSI clock. */
+    RCC->CR |= RCC_CR_HSION;
+    while ((RCC->CR & RCC_CR_HSIRDY) == 0);
+    RCC->CFGR |= RCC_CFGR_SW_HSI;
+    
     /* Setup input pins. */
     
     /* Enable GPIOA clock and set modes of PA0 and PA1 to input. */
@@ -67,22 +72,3 @@ void setup_interrupts()
     __enable_irq();
 }
 
-
-/* Setup keypad interface. */
-void setup_keypad(void)
-{  
-    /* Setup GPIOB clock. */
-    RCC->AHBENR |= GPIOB_RCC_EN;
-       
-    /* Setup GPIOB moder. */
-       
-    /* Clear mode bits. */
-    KEYPAD_GPIO->MODER &= (KEYPAD_ROW_MODER_CLR & KEYPAD_COL_MODER_CLR);
-    
-    /* Set mode bits. */
-    KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET);
-       
-    /* Make row pins default to high. */
-    KEYPAD_GPIO->PUPDR &= KEYPAD_PULLUP_RST;
-    KEYPAD_GPIO->PUPDR |= KEYPAD_PULLUP_SET;
-}
