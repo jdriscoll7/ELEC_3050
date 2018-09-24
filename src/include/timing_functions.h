@@ -23,6 +23,7 @@
 
 
 #define TIMER_CLEAR         ((uint16_t) 0x0)
+#define TIM10_COUNT         (TIM10->CNT)
 
 
 #define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
