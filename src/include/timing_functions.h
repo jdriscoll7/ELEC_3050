@@ -22,6 +22,9 @@
 #define DEFAULT_AUTO_RELOAD ((uint16_t) 99)
 
 
+#define TIMER_CLEAR         ((uint16_t) 0x0)
+
+
 #define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
 
 
