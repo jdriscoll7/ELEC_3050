@@ -11,8 +11,8 @@
 #include "timing_functions.h"
 
 
-/* Clear timer global variables. */
-void clear_timer_globals(void)
+/* Clear timer global variables and reset . */
+void clear_timer(void)
 {
     g_time_ones = 0;
     g_time_tenths = 0;
