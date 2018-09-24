@@ -40,7 +40,7 @@ int main()
                     /* Only clear timer values if timer is enabled. */
                     if (TIMER_ON_OR_OFF == 0)
                     {
-                        clear_timer_globals();
+                        clear_timer();
                     }
                     
                     break;
