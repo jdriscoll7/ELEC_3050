@@ -14,8 +14,12 @@
 /* Clear timer global variables and reset . */
 void clear_timer(void)
 {
+    /* Reset global variables holding count. */
     g_time_ones = 0;
     g_time_tenths = 0;
+       
+    /* Reset timer's count register. */
+    TIM10_COUNT &= TIMER_CLEAR;
 }
 
 
