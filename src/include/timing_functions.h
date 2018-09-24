@@ -33,8 +33,8 @@ static int8_t g_time_ones   = 0;
 static int8_t g_time_tenths = 0;
 
 
-/* Clear timer global variables. */
-void clear_timer_globals(void);
+/* Clear timer count. */
+void clear_timer(void);
 
 
 /* Configure timer settings. */
