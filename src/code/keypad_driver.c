@@ -18,13 +18,15 @@ static uint16_t read_keypress(void)
         /* Drive column low. */
         keypad_write_to_odr(~(0x1 << (column + COL_OFFSET)), 0xF0);
 			
+				for (int i = 0; i < 10000; i++);
+			
         uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
          
         /* Are any rows driven low? */
         if (shifted_row_input_data != 0xF)
         {
             /* 4-bit value with a zero in current column and ones in other (three) columns. */
-            uint16_t row_data = (~(shifted_row_input_data) & 0xF) >> 1;
+            uint16_t row_data = (~(shifted_row_input_data) & 0xF) / 2;
             
             uint16_t row = 0;
           
@@ -34,7 +36,13 @@ static uint16_t read_keypress(void)
                 row_data = (row_data >> 1);
                 row++;
             }
-             
+						
+						/* Reset all column values to low to allow interrupt retriggering. */
+						keypad_write_to_odr(0x0, 0xF0);
+						
+						/* Signal that key has been pressed. */
+						key_pressed_flag = true;
+						
             /* Return correct decoding. */
             return decode_row_col(row, column);
         }
@@ -42,6 +50,9 @@ static uint16_t read_keypress(void)
     
 		/* Reset all column values to low to allow interrupt retriggering. */
 		keypad_write_to_odr(0x0, 0xF0);
+		
+		/* Bouncing bad. */
+		key_pressed_flag = false;
 		
     /* If function reaches here, then there was an error. Always output F to detect error on testing. */
     return key_pressed;
@@ -62,8 +73,9 @@ void EXTI1_IRQHandler(void)
 {
     /* Set pressed flag and the key pressed. */
     key_pressed = read_keypress();
-    key_pressed_flag = true;
     
+		for (int i = 0; i < 10000; i++);
+	
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
 
