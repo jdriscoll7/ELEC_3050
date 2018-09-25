@@ -18,8 +18,8 @@
 
 #define CLOCK_FREQ          16000000
 #define DEFAULT_PERIOD      0.1
-#define DEFAULT_PRESCALE    ((uint16_t) 15)
-#define DEFAULT_AUTO_RELOAD ((uint16_t) 99)
+#define DEFAULT_PRESCALE    ((uint16_t) 159)
+#define DEFAULT_AUTO_RELOAD ((uint16_t) 9999)
 
 
 #define TIMER_CLEAR         ((uint16_t) 0x0)
