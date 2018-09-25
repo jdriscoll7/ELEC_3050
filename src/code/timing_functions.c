@@ -9,14 +9,21 @@
 
 
 #include "timing_functions.h"
+    
+
+/* Function for getting time. */
+uint16_t get_current_time(void)
+{
+    return ((uint16_t) ((time_ones << 4) + time_tenths));
+}
 
 
 /* Clear timer global variables and reset . */
 void clear_timer(void)
 {
     /* Reset global variables holding count. */
-    g_time_ones = 0;
-    g_time_tenths = 0;
+    time_ones = 0;
+    time_tenths = 0;
        
     /* Reset timer's count register. */
     TIM10_COUNT &= TIMER_CLEAR;
@@ -98,13 +105,17 @@ void delay(double seconds)
 void TIM10_IRQHandler(void)
 {
     /* Increment ones place if tenth's place rolls over. */
-    if (g_time_tenths == 9)
+    if (time_tenths == 9)
     {
-        g_time_ones = MOD(g_time_ones + 1, 10);
+        time_ones = MOD(time_ones + 1, 10);
     }
     
     /* First count (PC[3:0]) is tenth of a second base. */
-    g_time_tenths = MOD(g_time_tenths + 1, 10);
+    time_tenths = MOD(time_tenths + 1, 10);
+    
+    
+    /* Write count, overlaying ones-count to upper four bits and tenths to lower four bits. */
+    write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
     
     /* Clear all interrupt request pending registers. */
     NVIC_ClearPendingIRQ(TIM10_IRQn);

@@ -12,7 +12,7 @@ static void keypad_write_to_odr(uint16_t value, uint16_t bitmask)
 /* Reads the key pressed on the keypad and returns the number it represents. */
 static uint16_t read_keypress(void)
 {
-    /* Iterate columns and read every row per interation. */
+    /* Iterate columns and read every row per iteration. */
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
@@ -24,7 +24,7 @@ static uint16_t read_keypress(void)
         if (shifted_row_input_data != 0xF)
         {
             /* 4-bit value with a zero in current column and ones in other (three) columns. */
-            uint16_t row_data = (~(shifted_row_input_data) & 0xF) / 2;
+            uint16_t row_data = (~(shifted_row_input_data) & 0xF) >> 1;
             
             uint16_t row = 0;
           

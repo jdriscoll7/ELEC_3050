@@ -29,9 +29,13 @@
 #define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
 
 
-/* Global variable for timer values. */
-static int8_t g_time_ones   = 0;
-static int8_t g_time_tenths = 0;
+/* Variable for timer values. */
+static uint8_t time_ones   = 0;
+static uint8_t time_tenths = 0;
+
+
+/* Function for getting time. */
+uint16_t get_current_time(void);
 
 
 /* Clear timer count. */

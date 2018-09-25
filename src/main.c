@@ -48,8 +48,5 @@ int main()
           
             clear_key_pressed_flag();
         }
-        
-        /* Write count, overlaying ones-count to upper four bits and tenths to lower four bits. */
-        write_to_odr(GPIOC, (g_time_ones << 4) + g_time_tenths, NO_SHIFT, 0xFF);
     }
 }
