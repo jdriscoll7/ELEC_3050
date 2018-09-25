@@ -16,7 +16,7 @@
 #include <stdint.h>
 
 
-#define CLOCK_FREQ          (0x1 << 24)
+#define CLOCK_FREQ          16000000
 #define DEFAULT_PERIOD      0.1
 #define DEFAULT_PRESCALE    ((uint16_t) 15)
 #define DEFAULT_AUTO_RELOAD ((uint16_t) 99)
