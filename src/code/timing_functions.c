@@ -27,6 +27,9 @@ void clear_timer(void)
        
     /* Reset timer's count register. */
     TIM10_COUNT &= TIMER_CLEAR;
+	
+		/* Write value. */
+	  write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
 }
 
 
@@ -112,7 +115,6 @@ void TIM10_IRQHandler(void)
     
     /* First count (PC[3:0]) is tenth of a second base. */
     time_tenths = MOD(time_tenths + 1, 10);
-    
     
     /* Write count, overlaying ones-count to upper four bits and tenths to lower four bits. */
     write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
