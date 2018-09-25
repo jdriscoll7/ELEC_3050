@@ -30,7 +30,9 @@ int main()
         /* Detect if keypad has been activated recently. */
         if (check_key_pressed() == true)
         {
-            switch (get_key_pressed())
+					  uint16_t key_pressed = get_key_pressed();
+					
+            switch (key_pressed)
             {
                 case TIMER_ENABLE_KEY:
                     toggle_enable_TIM10();
