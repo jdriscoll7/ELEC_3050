@@ -1,3 +1,12 @@
+/* - File: keypad_driver.c
+
+       - Description
+           - Implements keypad device interface.
+             
+       - Author: Joe Driscoll 
+*/
+
+
 #include "keypad_driver.h"
 #include "stdlib.h"
 
@@ -18,7 +27,7 @@ static uint16_t read_keypress(void)
         /* Drive column low. */
         keypad_write_to_odr(~(0x1 << (column + COL_OFFSET)), 0xF0);
 			
-				for (int i = 0; i < 10000; i++);
+        for (int i = 0; i < 10000; i++);
 			
         uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
          
@@ -37,22 +46,22 @@ static uint16_t read_keypress(void)
                 row++;
             }
 						
-						/* Reset all column values to low to allow interrupt retriggering. */
-						keypad_write_to_odr(0x0, 0xF0);
+            /* Reset all column values to low to allow interrupt retriggering. */
+            keypad_write_to_odr(0x0, 0xF0);
 						
-						/* Signal that key has been pressed. */
-						key_pressed_flag = true;
+            /* Signal that key has been pressed. */
+            key_pressed_flag = true;
 						
             /* Return correct decoding. */
             return decode_row_col(row, column);
         }
     }
     
-		/* Reset all column values to low to allow interrupt retriggering. */
-		keypad_write_to_odr(0x0, 0xF0);
-		
-		/* Bouncing bad. */
-		key_pressed_flag = false;
+    /* Reset all column values to low to allow interrupt retriggering. */
+    keypad_write_to_odr(0x0, 0xF0);
+    
+    /* Bouncing bad. */
+    key_pressed_flag = false;
 		
     /* If function reaches here, then there was an error. Always output F to detect error on testing. */
     return key_pressed;
@@ -67,14 +76,13 @@ static uint16_t decode_row_col(uint16_t row, uint16_t col)
 }
 
 
-
 /* Interrupt handler for keypad interrupt. */
 void EXTI1_IRQHandler(void)
 {
     /* Set pressed flag and the key pressed. */
     key_pressed = read_keypress();
     
-		for (int i = 0; i < 10000; i++);
+    for (int i = 0; i < 10000; i++);
 	
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
