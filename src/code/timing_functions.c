@@ -11,10 +11,38 @@
 #include "timing_functions.h"
     
 
+/* Increment timer - returns next time. */
+uint16_t increment_timer(void)
+{
+    /* Increment ones place if tenth's place rolls over. */
+    if (time_tenths == 9)
+    {
+        time_ones = MOD(time_ones + 1, 10);
+    }
+    
+    /* First count (PC[3:0]) is tenth of a second base. */
+    time_tenths = MOD(time_tenths + 1, 10);
+       
+    return get_current_time();
+}
+
+
+/* Clears timer interrupt. */
+void clear_tim10_interrupt(void)
+{
+    NVIC_ClearPendingIRQ(TIM10_IRQn);
+    TIM10->SR &= ~0x1;
+}
+
+
 void set_TIM10_functions(void (**new_functions)(void), size_t size)
 {
-    function_count = size;
-    tim10_function_array = new_functions;
+    function_count = size + 1;
+    &tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
+       
+    /* Set array to the input and add the clear interrupt function at the end. */
+    *tim10_function_array = *new_functions;
+    tim10_function_array[size] = clear_tim10_interrupt;
 }
 
 
@@ -114,19 +142,9 @@ void delay(double seconds)
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
-    /* Increment ones place if tenth's place rolls over. */
-    if (time_tenths == 9)
+       
+    for (int function; function < function_count; function++)
     {
-        time_ones = MOD(time_ones + 1, 10);
+        tim10_function_array[function](void);
     }
-    
-    /* First count (PC[3:0]) is tenth of a second base. */
-    time_tenths = MOD(time_tenths + 1, 10);
-    
-    /* Write count, overlaying ones-count to upper four bits and tenths to lower four bits. */
-    write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
-    
-    /* Clear all interrupt request pending registers. */
-    NVIC_ClearPendingIRQ(TIM10_IRQn);
-    TIM10->SR &= ~0x1;
 }
