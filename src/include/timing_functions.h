@@ -37,7 +37,7 @@ static uint8_t time_tenths = 0;
 /* Array of function pointers to make interrupt handler flexible. */
 uint16_t function_count;
 void (**tim10_function_array)(void);
-void set_TIM10_functions(void (**new_function)(void), size_t size);
+void set_TIM10_functions(void (**new_functions)(void), size_t size);
 
 
 /* Function for getting time. */
