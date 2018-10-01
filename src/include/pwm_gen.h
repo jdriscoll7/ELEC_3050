@@ -30,8 +30,12 @@
 
 /* Static variable that defines current duty cycle (along with getter/setter functions). */
 static float duty_cycle;
-void set_duty_cycle(void);
+void set_duty_cycle(float new_value);
 float get_duty_cycle(void);
+
+
+/* Function for determining output value of pwm. */
+uint16_t get_pwm_output(float time);
 
 
 /* Provides pin, clock, and initialization setup for the PWM. */
