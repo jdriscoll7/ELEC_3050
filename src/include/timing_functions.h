@@ -34,6 +34,10 @@ static uint8_t time_ones   = 0;
 static uint8_t time_tenths = 0;
 
 
+/* Clears timer interrupt. */
+void clear_tim10_interrupt(void);
+
+
 /* Array of function pointers to make interrupt handler flexible. */
 uint16_t function_count;
 void (**tim10_function_array)(void);
