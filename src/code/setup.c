@@ -45,7 +45,7 @@ void setup_pins()
     
     /* Enable PC8 and PC9 as digital output. (LEDs) */
     GPIOC_MODER &= PC98_DOUT_CLR; /* Clear relevant mode bits. */
-    GPIOC_MODER |= PC98_DOUT_SET; /* Clear relevant mode bits. */
+    GPIOC_MODER |= PC98_DOUT_SET; /* Set relevant mode bits. */
 }
 
 
