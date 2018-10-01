@@ -19,7 +19,14 @@ void write_to_odr(GPIO_TypeDef *gpio, uint16_t value, uint16_t shift, uint16_t b
 }
 
 
-/* A large function that just sets up a few different pins for basic operation. */
+/* A large function that just sets up a few different pins for basic operation. 
+        
+        Current setup:
+            - Turn on HSI clock.
+            - Configure PA0 and PA1 as inputs.
+            - Configure PC[7:0] as outputs.
+            - Configure PC[9:8] as outputs.
+*/
 void setup_pins()
 {
     /* Turn on HSI clock. */
