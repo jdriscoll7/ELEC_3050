@@ -6,6 +6,9 @@
 */
 
 
+#include "pwn_gen.h"
+
+
 /* Static variable that defines current duty cycle (along with getter/setter functions). */
 static float duty_cycle;
 
