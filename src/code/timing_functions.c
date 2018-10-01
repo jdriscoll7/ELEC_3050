@@ -37,6 +37,12 @@ void clear_tim10_interrupt(void)
 
 void set_TIM10_functions(void (**new_functions)(void), size_t size)
 {
+    /* Free previous function array if it isn't empty. */
+    if (function_count != 0)
+    {
+        free(tim10_function_array);
+    }
+       
     function_count = size + 1;
     &tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
        
