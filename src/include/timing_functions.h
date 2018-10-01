@@ -34,6 +34,12 @@ static uint8_t time_ones   = 0;
 static uint8_t time_tenths = 0;
 
 
+/* Array of function pointers to make interrupt handler flexible. */
+uint16_t function_count;
+void (**function_ptr_array)(void);
+void append_TIM10_function();
+
+
 /* Function for getting time. */
 uint16_t get_current_time(void);
 
