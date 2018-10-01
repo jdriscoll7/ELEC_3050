@@ -28,7 +28,7 @@ uint16_t increment_timer(void)
 
 
 /* Clears timer interrupt. */
-void clear_tim10_interrupt(void)
+void clear_TIM10_interrupt(void)
 {
     NVIC_ClearPendingIRQ(TIM10_IRQn);
     TIM10->SR &= ~0x1;
@@ -48,7 +48,7 @@ void set_TIM10_functions(void (**new_functions)(void), size_t size)
        
     /* Set array to the input and add the clear interrupt function at the end. */
     *tim10_function_array = *new_functions;
-    tim10_function_array[size] = clear_tim10_interrupt;
+    tim10_function_array[size] = clear_TIM10_interrupt;
 }
 
 
