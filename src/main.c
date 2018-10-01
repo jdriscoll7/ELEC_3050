@@ -18,12 +18,22 @@
 #define TIMER_CLEAR_KEY     0xE
 
 
+void increment_and_display(void)
+{
+    increment_timer();
+       
+    /* Write count, overlaying ones-count to upper four bits and tenths to lower four bits. */
+    write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
+}
+
+
 int main()
 {
     setup_pins();
     setup_interrupts();
     setup_keypad();
     setup_TIM10();
+    set_TIM10_functions({increment_and_display}, 1);
     
     while (1)
     {
