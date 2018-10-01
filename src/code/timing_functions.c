@@ -11,15 +11,10 @@
 #include "timing_functions.h"
     
 
-void append_TIM10_function()
+void set_TIM10_functions(void (**new_functions)(void), size_t size)
 {
-    function_count++;
-    
-    if (function_count != 1)
-    {
-    
-    }
-    
+    function_count = size;
+    tim10_function_array = new_functions;
 }
 
 
