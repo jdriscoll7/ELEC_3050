@@ -28,6 +28,12 @@
 #define KEY_TO_DUTY_CYCLE(key) ((float) (((float) (key)) / 10.0))
 
 
+/* Static variable that defines current duty cycle (along with getter/setter functions). */
+static float duty_cycle;
+void set_duty_cycle(void);
+float get_duty_cycle(void);
+
+
 /* Provides pin, clock, and initialization setup for the PWM. */
 void setup_pwm(void);
 
