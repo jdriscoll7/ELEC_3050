@@ -16,10 +16,6 @@
 #include "pin_definitions.h"
 
 
-/* Output PWM on PA6. */
-#define PWM_OUTPUT_PIN 6
-
-
 /* 1kHz switching frequency. */
 #define SWITCHING_FREQ 1000
 
@@ -36,10 +32,6 @@ float get_duty_cycle(void);
 
 /* Function for determining output value of pwm. */
 uint16_t get_pwm_output(float time);
-
-
-/* Provides pin, clock, and initialization setup for the PWM. */
-void setup_pwm(void);
 
 
 #endif
