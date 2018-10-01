@@ -53,6 +53,10 @@ void set_TIM10_functions(void (**new_functions)(void), size_t size);
 uint16_t get_current_time(void);
 
 
+/* Increment timer - returns next time. */
+uint16_t increment_timer(void);
+
+
 /* Clear timer count. */
 void clear_timer(void);
 
