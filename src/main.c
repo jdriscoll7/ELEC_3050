@@ -40,24 +40,13 @@ int main()
         /* Detect if keypad has been activated recently. */
         if (check_key_pressed() == true)
         {
+            /* Decode key and set the duty cycle. */
             uint16_t key_pressed = get_key_pressed();
+            set_duty_cycle(KEY_TO_DUTY_CYCLE(key_pressed));
+            
+            /* Display duty cycle on LEDs. */
+            write_to_odr(GPIOC, key_pressed, NO_SHIFT, 0xF);
 
-            switch (key_pressed)
-            {
-                case TIMER_ENABLE_KEY:
-                    toggle_enable_TIM10();
-                    break;
-                
-                case TIMER_CLEAR_KEY:
-                    /* Only clear timer values if timer is enabled. */
-                    if (TIMER_ON_OR_OFF == 0)
-                    {
-                        clear_timer();
-                    }
-                    
-                    break;
-            }
-          
             clear_key_pressed_flag();
         }
     }
