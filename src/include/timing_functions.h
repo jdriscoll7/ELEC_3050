@@ -29,6 +29,11 @@
 #define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
 
 
+/* Function pointer and pointer to function pointer types. */
+typedef void (*function_ptr)(void);
+typedef function_ptr *function_ptr_arr;
+
+
 /* Variable for timer values. */
 static uint8_t time_ones   = 0;
 static uint8_t time_tenths = 0;
