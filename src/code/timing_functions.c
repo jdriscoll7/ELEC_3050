@@ -11,6 +11,18 @@
 #include "timing_functions.h"
     
 
+void append_TIM10_function()
+{
+    function_count++;
+    
+    if (function_count != 1)
+    {
+    
+    }
+    
+}
+
+
 /* Function for getting time. */
 uint16_t get_current_time(void)
 {
