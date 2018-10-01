@@ -27,9 +27,9 @@ void clear_timer(void)
        
     /* Reset timer's count register. */
     TIM10_COUNT &= TIMER_CLEAR;
-	
-		/* Write value. */
-	  write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
+
+    /* Write value. */
+    write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
 }
 
 
