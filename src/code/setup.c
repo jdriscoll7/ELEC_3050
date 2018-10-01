@@ -29,6 +29,8 @@ void write_to_odr(GPIO_TypeDef *gpio, uint16_t value, uint16_t shift, uint16_t b
             - Configure PA0 and PA1 as inputs.
             - Configure PC[7:0] as outputs.
             - Configure PC[9:8] as outputs.
+            - Configure PA6 as output (for PWM).
+            
 */
 void setup_pins()
 {
@@ -56,6 +58,10 @@ void setup_pins()
     /* Enable PC8 and PC9 as digital output. (LEDs) */
     GPIOC_MODER &= PC98_DOUT_CLR; /* Clear relevant mode bits. */
     GPIOC_MODER |= PC98_DOUT_SET; /* Set relevant mode bits. */
+       
+    /* Set PA6 as digital output. */
+    GPIOA_MODER &= PWM_MODE_CLR;
+    GPIOA_MODER |= PWM_MODE_SET;
 }
 
 
