@@ -1,4 +1,4 @@
-/* - File: pwm_gen.h 
+/* - File: pwm_gen.c
        - Description
            - Provides a convenient interface to a PWM.
              
@@ -32,13 +32,6 @@ uint16_t get_pwm_output(float time)
     
     /* Off if time is past the on portion of pulse, on otherwise. */
     return ((portion_completed > duty_cycle) ? 0 : 1)
-}
-
-
-/* Provides pin, clock, and initialization setup for the PWM. */
-void setup_pwm(void)
-{
-    
 }
 
 
