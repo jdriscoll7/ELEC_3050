@@ -10,7 +10,7 @@
 #define PWM_GEN_H
 
 
-#define KEY_TO_DUTY_CYCLE(key) ((float) (((float) key) / 10.0))
+#define KEY_TO_DUTY_CYCLE(key) ((float) (((float) (key)) / 10.0))
 
 
 #endif
