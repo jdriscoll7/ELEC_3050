@@ -31,7 +31,7 @@
 
 /* Function pointer and pointer to function pointer types. */
 typedef void (*function_ptr)(void);
-typedef function_ptr *function_ptr_arr;
+typedef function_ptr *function_ptr_ptr;
 
 
 /* Variable for timer values. */
@@ -44,9 +44,9 @@ void clear_tim10_interrupt(void);
 
 
 /* Array of function pointers to make interrupt handler flexible. */
-uint16_t function_count;
-void (**tim10_function_array)(void);
-void set_TIM10_functions(void (**new_functions)(void), size_t size);
+static uint16_t function_count;
+static function_ptr_ptr tim10_function_array;
+void set_TIM10_functions(function_ptr new_functions, uint16_t size);
 
 
 /* Function for getting time. */

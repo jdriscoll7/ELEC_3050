@@ -9,7 +9,7 @@
 
 
 #include "timing_functions.h"
-    
+#include <stdlib.h>    
 
 /* Increment timer - returns next time. */
 uint16_t increment_timer(void)
@@ -35,7 +35,7 @@ void clear_TIM10_interrupt(void)
 }
 
 
-void set_TIM10_functions(void (**new_functions)(void), size_t size)
+void set_TIM10_functions(function_ptr new_functions, uint16_t size)
 {
     /* Free previous function array if it isn't empty. */
     if (function_count != 0)
@@ -44,11 +44,11 @@ void set_TIM10_functions(void (**new_functions)(void), size_t size)
     }
        
     function_count = size + 1;
-    &tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
+    tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
        
     /* Set array to the input and add the clear interrupt function at the end. */
-    *tim10_function_array = *new_functions;
-    tim10_function_array[size] = clear_TIM10_interrupt;
+    tim10_function_array[0] = new_functions;
+    tim10_function_array[size] = &clear_TIM10_interrupt;
 }
 
 
@@ -148,9 +148,8 @@ void delay(double seconds)
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
-       
-    for (int function; function < function_count; function++)
+    for (int function = 0; function < function_count; function++)
     {
-        tim10_function_array[function](void);
+        tim10_function_array[function]();
     }
 }

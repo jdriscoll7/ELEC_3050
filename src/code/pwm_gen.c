@@ -6,7 +6,7 @@
 */
 
 
-#include "pwn_gen.h"
+#include "pwm_gen.h"
 
 
 /* Static variable that defines current duty cycle (along with getter/setter functions). */
@@ -34,8 +34,5 @@ uint16_t get_pwm_output(float time)
     float portion_completed = time * SWITCHING_FREQ;
     
     /* Off if time is past the on portion of pulse, on otherwise. */
-    return ((portion_completed > duty_cycle) ? 0 : 1)
+    return ((portion_completed > duty_cycle) ? 0 : 1);
 }
-
-
-#endif

@@ -19,6 +19,7 @@
 #include "interrupt_handlers.h"
 #include "keypad_driver.h"
 #include "pin_definitions.h"
+#include "pwm_gen.h"
 
 
 /* GPIO definitions. */
