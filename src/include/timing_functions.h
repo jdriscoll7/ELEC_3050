@@ -16,10 +16,11 @@
 #include <stdint.h>
 
 
+/* Default 1 ms period. */
 #define CLOCK_FREQ          16000000
 #define DEFAULT_PERIOD      0.1
-#define DEFAULT_PRESCALE    ((uint16_t) 159)
-#define DEFAULT_AUTO_RELOAD ((uint16_t) 9999)
+#define DEFAULT_PRESCALE    ((uint16_t) 4)
+#define DEFAULT_AUTO_RELOAD ((uint16_t) 3199)
 
 
 #define TIMER_CLEAR         ((uint16_t) 0x0)
@@ -63,6 +64,10 @@ void clear_timer(void);
 
 /* Configure timer settings. */
 void configure_timer(TIM_TypeDef *timer, uint16_t prescale, uint16_t auto_reload);
+
+
+/* Set pwm parameters of timer. */
+void set_timer_pwm_parameters(TIM_TypeDef *timer, uint16_t ccr, uint16_t arr);
 
 
 /* Enable counting on timer. */

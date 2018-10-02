@@ -11,6 +11,7 @@
 #include "timing_functions.h"
 #include <stdlib.h>    
 
+
 /* Increment timer - returns next time. */
 uint16_t increment_timer(void)
 {
@@ -43,6 +44,7 @@ void set_TIM10_functions(function_ptr new_functions, uint16_t size)
         free(tim10_function_array);
     }
        
+    /* Reserve memory for function pointers and make room for additional PR clear function. */
     function_count = size + 1;
     tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
        
@@ -78,6 +80,17 @@ void clear_timer(void)
 void disable_TIM10(void)
 {
     TIM10->CR1 &= ~TIM_CR1_CEN;
+}
+
+
+/* Set pwm parameters of timer. */
+void set_timer_pwm_parameters(TIM_TypeDef *timer, uint16_t ccr, uint16_t arr)
+{
+    timer->CCR1 |= ((uint32_t) ccr);
+    timer->CCR1 &= ~((uint32_t) ~ccr);
+    
+    timer->ARR |= ((uint32_t) arr);
+    timer->ARR &= ~((uint32_t) ~arr);
 }
 
 
@@ -118,13 +131,19 @@ void setup_TIM10(void)
     RCC->APB2ENR |= RCC_APB2ENR_TIM10EN;
     
     /* Enable TIM10 interrupt source in NVIC. */
-    NVIC_EnableIRQ(TIM10_IRQn);
+    //NVIC_EnableIRQ(TIM10_IRQn);
     
     /* Make TIM10 generate interrupts. */
-    TIM10->DIER |= TIM_DIER_UIE;
+    //TIM10->DIER |= TIM_DIER_UIE;
     
     /* Configure timer to default settings. */
     configure_timer(TIM10, DEFAULT_PRESCALE, DEFAULT_AUTO_RELOAD);
+    
+    /* PWM mode 1 (active high). */
+    TIM10->CCMR1 |= 0x60;
+    
+    /* Enable capture/compare register. */
+    TIM10->CCER |= 0x1;
     
     /* Timer initially off. */
     disable_TIM10();

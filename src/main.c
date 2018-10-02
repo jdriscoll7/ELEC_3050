@@ -32,10 +32,10 @@ int main()
     setup_pins();
     setup_interrupts();
     setup_keypad();
-    setup_TIM10();
+    setup_pwm();
     
-    function_ptr tim10_functions = {increment_and_display};
-    set_TIM10_functions(tim10_functions, 1);
+    //function_ptr tim10_functions = {increment_and_display};
+    //set_TIM10_functions(tim10_functions, 1);
     enable_TIM10();
     
     while (1)

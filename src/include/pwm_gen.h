@@ -24,14 +24,23 @@
 #define KEY_TO_DUTY_CYCLE(key) ((float) (((float) (key)) / 10.0))
 
 
+/* Calculates ARR for a switching frequency. */
+uint16_t calculate_arr(uint32_t frequency);
+
+
+/* Calculates CCR for a switching frequency. */
+uint16_t calculate_ccr(uint16_t arr);
+
+
+
 /* Static variable that defines current duty cycle (along with getter/setter functions). */
 static float duty_cycle;
-void set_duty_cycle(float new_value);
+void set_duty_cycle(float new_duty_cycle);
 float get_duty_cycle(void);
 
 
-/* Function for determining output value of pwm. */
-uint16_t get_pwm_output(float time);
+/* Configures timer and other relevant bits. */
+void setup_pwm(void);
 
 
 #endif

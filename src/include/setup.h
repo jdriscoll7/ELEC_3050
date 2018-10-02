@@ -30,8 +30,8 @@
 
 
 /* Output PWM on PA6. */
-#define PWM_MODE_SET (0x1)
-#define PWM_MODE_CLR (~0x2)
+#define PWM_MODE_SET (0x2 << 12)
+#define PWM_MODE_CLR (~(0x01 << 12))
 
 
 #define NO_SHIFT 0

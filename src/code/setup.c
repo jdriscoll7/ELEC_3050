@@ -59,9 +59,11 @@ void setup_pins()
     GPIOC_MODER &= PC98_DOUT_CLR; /* Clear relevant mode bits. */
     GPIOC_MODER |= PC98_DOUT_SET; /* Set relevant mode bits. */
        
-    /* Set PA6 as digital output. */
+    /* Set PA6 as alternate function (PWM). */
     GPIOA_MODER &= PWM_MODE_CLR;
     GPIOA_MODER |= PWM_MODE_SET;
+    GPIOA->AFR[0] &= ~0x0F000000; //clear AFRL6
+    GPIOA->AFR[0] |= 0x02000000;  //PA6 = AF2
 }
 
 
