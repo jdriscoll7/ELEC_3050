@@ -8,6 +8,7 @@
        - Author: Joe Driscoll 
 */
 
+
 #include "setup.h"
 
 
@@ -63,7 +64,7 @@ void setup_pins()
     GPIOA_MODER &= PWM_MODE_CLR;
     GPIOA_MODER |= PWM_MODE_SET;
     GPIOA->AFR[0] &= ~0x0F000000; //clear AFRL6
-    GPIOA->AFR[0] |= 0x04000000;  //PA6 = AF3
+    GPIOA->AFR[0] |= 0x03000000;  //PA6 = AF3
 }
 
 
