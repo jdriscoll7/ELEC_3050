@@ -28,7 +28,7 @@
 uint16_t calculate_arr(uint32_t frequency);
 
 
-/* Calculates CCR for a switching frequency. */
+/* Calculates CCR for a given auto-reload value. */
 uint16_t calculate_ccr(uint16_t arr);
 
 
