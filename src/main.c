@@ -33,10 +33,7 @@ int main()
     setup_interrupts();
     setup_keypad();
     setup_pwm();
-    
-    //function_ptr tim10_functions = {increment_and_display};
-    //set_TIM10_functions(tim10_functions, 1);
-    
+    setup_tachometer_driver();    
     
     while (1)
     {

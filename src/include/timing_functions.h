@@ -18,7 +18,7 @@
 
 /* Default 1 ms period. */
 #define CLOCK_FREQ          16000000
-#define DEFAULT_PERIOD      0.1
+#define DEFAULT_PERIOD      0.001
 #define DEFAULT_PRESCALE    ((uint16_t) 4)
 #define DEFAULT_AUTO_RELOAD ((uint16_t) 3199)
 

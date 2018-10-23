@@ -203,7 +203,7 @@ void setup_TIM11(void)
     TIM11->CCMR1 &= 0x0;
     
     /* Edit capture/compare select to input mode. */
-    TIM11->CCMR1 |= 0x01
+    TIM11->CCMR1 |= 0x01;
     
     /* Enable capture/compare register - defaults to rising edge. */
     TIM11->CCER |= 0x1;
