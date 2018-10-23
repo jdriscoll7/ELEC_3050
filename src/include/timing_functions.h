@@ -30,6 +30,10 @@
 #define TIMER_ON_OR_OFF     (TIM10->CR1 & TIM_CR1_CEN)
 
 
+/* Standard number of timers that can have their own function array. */
+#define N_TIMERS 32
+
+
 /* Function pointer and pointer to function pointer types. */
 typedef void (*function_ptr)(void);
 typedef function_ptr *function_ptr_ptr;
@@ -41,14 +45,18 @@ static uint8_t time_tenths = 0;
 
 
 /* Clears timer interrupt. */
-void clear_tim10_interrupt(void);
+void clear_TIM10_interrupt(void);
+void clear_TIM11_interrupt(void);
 
 
 /* Array of function pointers to make interrupt handler flexible. */
-static uint16_t function_count;
-static function_ptr_ptr tim10_function_array;
-void set_TIM10_functions(function_ptr new_functions, uint16_t size);
+static uint16_t function_count[N_TIMERS];
+static function_ptr_ptr timer_function_array[N_TIMERS];
+void set_timer_functions(TIM_TypeDef *timer, function_ptr new_functions, uint16_t size);
 
+
+/* Decode timer number. */
+uint16_t decode_timer_number(TIM_TypeDef *timer);
 
 /* Function for getting time. */
 uint16_t get_current_time(void);
@@ -71,11 +79,11 @@ void set_timer_pwm_parameters(TIM_TypeDef *timer, uint16_t ccr, uint16_t arr);
 
 
 /* Enable counting on timer. */
-void enable_TIM10(void);
+void enable_timer(TIM_TypeDef *timer);
 
 
 /* Disable counting on timer. */
-void disable_TIM10(void);
+void disable_TIM10(TIM_TypeDef *timer);
 
 
 /* Toggle TIM10 on/off. */

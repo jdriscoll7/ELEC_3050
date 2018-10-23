@@ -36,7 +36,7 @@ int main()
     
     //function_ptr tim10_functions = {increment_and_display};
     //set_TIM10_functions(tim10_functions, 1);
-    enable_TIM10();
+    
     
     while (1)
     {
@@ -48,7 +48,7 @@ int main()
             set_duty_cycle(KEY_TO_DUTY_CYCLE(key_pressed));
             
             /* Display duty cycle on LEDs. */
-            write_to_odr(GPIOC, key_pressed, NO_SHIFT, 0xF);
+            //write_to_odr(GPIOC, key_pressed, NO_SHIFT, 0xF);
 
             clear_key_pressed_flag();
         }

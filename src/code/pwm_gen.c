@@ -49,4 +49,5 @@ float get_duty_cycle(void)
 void setup_pwm(void)
 {
     setup_TIM10();
+    enable_timer(TIM10);
 }

@@ -36,21 +36,55 @@ void clear_TIM10_interrupt(void)
 }
 
 
-void set_TIM10_functions(function_ptr new_functions, uint16_t size)
+/* Clears timer interrupt. */
+void clear_TIM11_interrupt(void)
 {
+    NVIC_ClearPendingIRQ(TIM11_IRQn);
+    TIM11->SR &= ~0x1;
+}
+
+
+/* Decode timer number. */
+uint16_t decode_timer_number(TIM_TypeDef *timer)
+{
+    switch((uint32_t) timer)
+    {    
+        case ((uint32_t) TIM2):
+            return 2;
+        case ((uint32_t) TIM3):
+            return 3;
+        case ((uint32_t) TIM4):
+            return 4;
+        case ((uint32_t) TIM6):
+            return 6;
+        case ((uint32_t) TIM9):
+            return 9;
+        case ((uint32_t) TIM10):
+            return 10;
+        case ((uint32_t) TIM11):
+            return 11;
+    };
+    
+    return 0;
+}
+
+
+void set_timer_functions(TIM_TypeDef *timer, function_ptr new_functions, uint16_t size)
+{
+    uint16_t timer_number = decode_timer_number(timer);
+    
     /* Free previous function array if it isn't empty. */
-    if (function_count != 0)
+    if (function_count[timer_number] != 0)
     {
-        free(tim10_function_array);
+        free(timer_function_array[timer_number]);
     }
        
     /* Reserve memory for function pointers and make room for additional PR clear function. */
-    function_count = size + 1;
-    tim10_function_array = malloc(size*sizeof(function_ptr) + 1);
+    function_count[timer_number] = size;
+    timer_function_array[timer_number] = malloc(size*sizeof(function_ptr));
        
     /* Set array to the input and add the clear interrupt function at the end. */
-    tim10_function_array[0] = new_functions;
-    tim10_function_array[size] = &clear_TIM10_interrupt;
+    timer_function_array[timer_number][0] = new_functions;
 }
 
 
@@ -77,9 +111,9 @@ void clear_timer(void)
 
 
 /* Disable counting on timer. */
-void disable_TIM10(void)
+void disable_timer(TIM_TypeDef *timer)
 {
-    TIM10->CR1 &= ~TIM_CR1_CEN;
+    timer->CR1 &= ~TIM_CR1_CEN;
 }
 
 
@@ -95,23 +129,23 @@ void set_timer_pwm_parameters(TIM_TypeDef *timer, uint16_t ccr, uint16_t arr)
 
 
 /* Enable counting on timer. */
-void enable_TIM10(void)
+void enable_timer(TIM_TypeDef *timer)
 {
-    TIM10->CR1 |= TIM_CR1_CEN;
+    timer->CR1 |= TIM_CR1_CEN;
 }
 
 
 /* Toggle TIM10 on/off. */
-void toggle_enable_TIM10(void)
+void toggle_enable_timer(TIM_TypeDef *timer)
 {
     /* If on, turn off and vice versa. */
     if (TIMER_ON_OR_OFF != 0)
     {
-        disable_TIM10();
+        disable_timer(timer);
     }
     else
     {
-        enable_TIM10();
+        enable_timer(timer);
     }
 }
 
@@ -146,7 +180,7 @@ void setup_TIM10(void)
     TIM10->CCER |= 0x1;
     
     /* Timer initially off. */
-    disable_TIM10();
+    disable_timer(TIM10);
 }
 
 
@@ -167,8 +201,22 @@ void delay(double seconds)
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
-    for (int function = 0; function < function_count; function++)
+    for (int function = 0; function < function_count[10]; function++)
     {
-        tim10_function_array[function]();
+        timer_function_array[10][function]();
     }
+    
+    clear_TIM10_interrupt();
+}
+
+
+/* TIM11 interrupt handler. */
+void TIM11_IRQHandler(void)
+{
+    for (int function = 0; function < function_count[11]; function++)
+    {
+        timer_function_array[11][function]();
+    }
+    
+    clear_TIM11_interrupt();
 }
