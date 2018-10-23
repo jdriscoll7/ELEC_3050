@@ -18,9 +18,9 @@
 
 /* Default 1 ms period. */
 #define CLOCK_FREQ          16000000
-#define DEFAULT_PERIOD      0.001
+#define DEFAULT_PERIOD      0.02
 #define DEFAULT_PRESCALE    ((uint16_t) 4)
-#define DEFAULT_AUTO_RELOAD ((uint16_t) 3199)
+#define DEFAULT_AUTO_RELOAD ((uint16_t) 63999)
 
 
 #define TIMER_CLEAR         ((uint16_t) 0x0)
@@ -30,7 +30,7 @@
 
 
 /* Standard number of timers that can have their own function array. */
-#define N_TIMERS 32
+#define N_TIMERS 12
 
 
 /* Function pointer and pointer to function pointer types. */
@@ -49,8 +49,8 @@ void clear_TIM11_interrupt(void);
 
 
 /* Array of function pointers to make interrupt handler flexible. */
-static uint16_t function_count[N_TIMERS];
-static function_ptr_ptr timer_function_array[N_TIMERS];
+static uint16_t function_count;
+static function_ptr_ptr timer_function_array;
 void set_timer_functions(TIM_TypeDef *timer, function_ptr new_functions, uint16_t size);
 
 
