@@ -90,8 +90,9 @@ void disable_TIM10(TIM_TypeDef *timer);
 void toggle_enable_TIM10(void);
 
 
-/* Initialize timer. */
+/* Initialize timers. */
 void setup_TIM10(void);
+void setup_TIM11(void);
 
 
 /* Delays for x seconds by doing meaningless adds. */

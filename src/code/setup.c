@@ -65,6 +65,12 @@ void setup_pins()
     GPIOA_MODER |= PWM_MODE_SET;
     GPIOA->AFR[0] &= ~0x0F000000; //clear AFRL6
     GPIOA->AFR[0] |= 0x03000000;  //PA6 = AF3
+    
+    /* Set PA7 as alternate function (input capture). */
+    GPIOA_MODER &= ICM_MODE_CLR;
+    GPIOA_MODER |= ICM_MODE_SET;
+    GPIOA->AFR[0] &= ~0xF0000000; //clear AFRL7
+    GPIOA->AFR[0] |= 0x30000000;  //PA7 = AF3
 }
 
 

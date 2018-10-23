@@ -158,7 +158,7 @@ void configure_timer(TIM_TypeDef *timer, uint16_t prescale, uint16_t auto_reload
 }
 
 
-/* Initialize timer. */
+/* Initialize timer 10. */
 void setup_TIM10(void)
 {
     /* Enable TIM10 clock on RCC. */
@@ -181,6 +181,35 @@ void setup_TIM10(void)
     
     /* Timer initially off. */
     disable_timer(TIM10);
+}
+
+
+/* Initialize timer 11. */
+void setup_TIM11(void)
+{
+    /* Enable TIM11 clock on RCC. */
+    RCC->APB2ENR |= RCC_APB2ENR_TIM11EN;
+    
+    /* Enable TIM11 interrupt source in NVIC. */
+    NVIC_EnableIRQ(TIM11_IRQn);
+    
+    /* Make TIM11 generate interrupts. */
+    TIM11->DIER |= TIM_DIER_UIE;
+    
+    /* Configure timer to default settings. */
+    configure_timer(TIM11, DEFAULT_PRESCALE, DEFAULT_AUTO_RELOAD);
+    
+    /* Reset all values */
+    TIM11->CCMR1 &= 0x0;
+    
+    /* Edit capture/compare select to input mode. */
+    TIM11->CCMR1 |= 0x01
+    
+    /* Enable capture/compare register - defaults to rising edge. */
+    TIM11->CCER |= 0x1;
+    
+    /* Timer initially off. */
+    disable_timer(TIM11);
 }
 
 

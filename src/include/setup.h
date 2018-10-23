@@ -20,6 +20,7 @@
 #include "keypad_driver.h"
 #include "pin_definitions.h"
 #include "pwm_gen.h"
+#include "tachometer_driver.h"
 
 
 /* GPIO definitions. */
@@ -33,6 +34,10 @@
 #define PWM_MODE_SET (0x2 << 12)
 #define PWM_MODE_CLR (~(0x01 << 12))
 
+
+/* Input capture on PA7. */
+#define ICM_MODE_SET (0x2 << 14)
+#define ICM_MODE_CLR (~(0x01 << 14))
 
 #define NO_SHIFT 0
 
