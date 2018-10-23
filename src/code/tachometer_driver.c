@@ -11,7 +11,7 @@
 #include "timing_functions.h"
 
 
-static double current_period;
+double current_period;
 
 
 /* Function fed to TIM11 interrupt handler. Updates the current_period. */
@@ -31,8 +31,8 @@ void setup_tachometer_driver(void)
 {
     /* Setup timer and set function defined in this file to handler. */
     setup_TIM11();
-    function_ptr function_array = {update_tach_period};
-    set_timer_functions(TIM11, function_array, 1);
+    //function_ptr function_array = {update_tach_period};
+    //set_timer_functions(TIM11, function_array, 1);
     
     enable_timer(TIM11);
 }

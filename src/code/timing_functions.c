@@ -40,7 +40,7 @@ void clear_TIM10_interrupt(void)
 void clear_TIM11_interrupt(void)
 {
     NVIC_ClearPendingIRQ(TIM11_IRQn);
-    TIM11->SR &= ~0x1;
+    TIM11->SR &= ~0x7;
 }
 
 
@@ -73,18 +73,15 @@ void set_timer_functions(TIM_TypeDef *timer, function_ptr new_functions, uint16_
 {
     uint16_t timer_number = decode_timer_number(timer);
     
-    /* Free previous function array if it isn't empty. */
-    if (function_count[timer_number] != 0)
-    {
-        free(timer_function_array[timer_number]);
-    }
+    /* Free previous function array. */
+		//free(timer_function_array[timer_number]);
        
     /* Reserve memory for function pointers and make room for additional PR clear function. */
-    function_count[timer_number] = size;
-    timer_function_array[timer_number] = malloc(size*sizeof(function_ptr));
+    function_count = size;
+    //timer_function_array = malloc(size*sizeof(function_ptr));
        
     /* Set array to the input and add the clear interrupt function at the end. */
-    timer_function_array[timer_number][0] = new_functions;
+    //timer_function_array[0] = new_functions;
 }
 
 
@@ -187,7 +184,7 @@ void setup_TIM11(void)
     NVIC_EnableIRQ(TIM11_IRQn);
     
     /* Make TIM11 generate interrupts. */
-    TIM11->DIER |= TIM_DIER_UIE;
+    TIM11->DIER |= (TIM_DIER_UIE << 1);
     
     /* Configure timer to default settings. */
     configure_timer(TIM11, DEFAULT_PRESCALE, DEFAULT_AUTO_RELOAD);
@@ -223,9 +220,9 @@ void delay(double seconds)
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
-    for (int function = 0; function < function_count[10]; function++)
+    for (int function = 0; function < function_count; function++)
     {
-        timer_function_array[10][function]();
+        timer_function_array[function]();
     }
     
     clear_TIM10_interrupt();
@@ -235,10 +232,19 @@ void TIM10_IRQHandler(void)
 /* TIM11 interrupt handler. */
 void TIM11_IRQHandler(void)
 {
-    for (int function = 0; function < function_count[11]; function++)
+   /* for (int function = 0; function < function_count; function++)
     {
-        timer_function_array[11][function]();
+        timer_function_array[function]();
     }
     
-    clear_TIM11_interrupt();
+    clear_TIM11_interrupt(); */
+	  /* Calculate period based on timer count. */
+    double percent_period = ((double) TIM11->CCR1) / (TIM11->ARR + 1);
+    set_tach_period(percent_period * DEFAULT_PERIOD);   
+    
+    /* Reset count value. */
+    clear_timer(TIM11);
+	
+	  clear_TIM11_interrupt();
+	
 }
