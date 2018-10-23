@@ -96,17 +96,10 @@ uint16_t get_current_time(void)
 
 
 /* Clear timer global variables and reset . */
-void clear_timer(void)
-{
-    /* Reset global variables holding count. */
-    time_ones = 0;
-    time_tenths = 0;
-       
+void clear_timer(TIM_TypeDef *timer)
+{       
     /* Reset timer's count register. */
-    TIM10_COUNT &= TIMER_CLEAR;
-
-    /* Write value. */
-    write_to_odr(GPIOC, get_current_time(), NO_SHIFT, 0xFF);
+    timer->CNT &= TIMER_CLEAR;
 }
 
 
