@@ -36,12 +36,14 @@ static uint16_t read_keypress(void)
         /* Are any rows driven low? If so, then the column has been found and row must be found. */
         if (shifted_row_input_data != 0xF)
         {
-            /* 4-bit value with a zero in current column and ones in other (three) columns. */
+            /* 4-bit value with a one in current column and zeros in other (three) columns. */
+            /* Shifting here makes the shift-count loop that follows simpler. */
             uint16_t row_data = (~(shifted_row_input_data) & 0xF) >> 1;
             
+            /* Row defaults to 0. */
             uint16_t row = 0;
           
-            /* Find index of row that is a zero. */
+            /* Find bit of row_data that is a one. */
             while (row_data > 0)
             {
                 row_data = (row_data >> 1);
@@ -62,10 +64,10 @@ static uint16_t read_keypress(void)
     /* Reset all column values to low to allow interrupt retriggering. */
     keypad_write_to_odr(0x0, 0xF0);
     
-    /* Bouncing bad. */
+    /* If function reaches here, then there was an error in scanning algorithm. 
+       This simply sets the key_pressed_flag to false, which treats this error
+       as a bounce that should be ignored (perhaps from button bouncing). */
     key_pressed_flag = false;
-
-    /* If function reaches here, then there was an error. Always output F to detect error on testing. */
     return key_pressed;
 }
 
