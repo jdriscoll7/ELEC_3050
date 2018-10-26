@@ -45,12 +45,12 @@
 #define KEYPAD_PULLUP_RST (~(0x00AA))
 
 
-/* Columns are GPIO inputs. */
+/* Rows are GPIO inputs. */
 #define KEYPAD_ROW_MODER_SET    0x00
 #define KEYPAD_ROW_MODER_CLR    ~(0x000000FF)
 
 
-/* Rows are GPIO outputs. */
+/* Columns are GPIO outputs. */
 #define KEYPAD_COL_MODER_SET    (0x55 << (2*4))
 #define KEYPAD_COL_MODER_CLR    ~(0x000000FF << (2*4))
 
