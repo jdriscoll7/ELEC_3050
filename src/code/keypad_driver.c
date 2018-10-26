@@ -85,8 +85,6 @@ void EXTI1_IRQHandler(void)
 {
     /* Set pressed flag and the key pressed. */
     key_pressed = read_keypress();
-    
-    for (int i = 0; i < 10000; i++);
 
     /* Clear EXTI pending register for interrupt source 1 (PA1). */
     EXTI_PR |= EXTI_PR_CLEAR(1);
@@ -96,21 +94,21 @@ void EXTI1_IRQHandler(void)
 }
 
 
-/* Check for key pressed. */
+/* Returns whether or not a key has recently been pressed. */
 bool check_key_pressed(void)
 {
     return key_pressed_flag;
 }
 
 
-/* Return the key pressed. */
+/* Return the value of the last key pressed. */
 uint16_t get_key_pressed(void)
 {
     return key_pressed;
 }
 
 
-/* Clear key_pressed_flag. */
+/* Clear key_pressed_flag to get ready for next key press. */
 void clear_key_pressed_flag(void)
 {
     key_pressed_flag = false;
@@ -124,12 +122,8 @@ void setup_keypad(void)
     RCC->AHBENR |= GPIOB_RCC_EN;
        
     /* Setup GPIOB moder. */
-       
-    /* Clear mode bits. */
-    KEYPAD_GPIO->MODER &= (KEYPAD_ROW_MODER_CLR & KEYPAD_COL_MODER_CLR);
-    
-    /* Set mode bits. */
-    KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET);
+    KEYPAD_GPIO->MODER &= (KEYPAD_ROW_MODER_CLR & KEYPAD_COL_MODER_CLR); /* Clear mode bits. */
+    KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET); /* Set mode bits.   */
        
     /* Make row pins default to high. */
     KEYPAD_GPIO->PUPDR &= KEYPAD_PULLUP_RST;
