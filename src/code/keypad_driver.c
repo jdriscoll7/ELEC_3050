@@ -37,7 +37,7 @@ static uint16_t read_keypress(void)
         if (shifted_row_input_data != 0xF)
         {
             /* 4-bit value with a zero in current column and ones in other (three) columns. */
-            uint16_t row_data = (~(shifted_row_input_data) & 0xF) / 2;
+            uint16_t row_data = (~(shifted_row_input_data) & 0xF) >> 1;
             
             uint16_t row = 0;
           
