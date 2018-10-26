@@ -1,8 +1,7 @@
 /* - File: keypad_driver.h 
 
        - Description
-           - A sort of device driver for the keypad
-             used in the projects.
+           - Header file for keypad driver.
              
        - Author: Joe Driscoll 
 */
