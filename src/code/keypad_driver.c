@@ -125,7 +125,7 @@ void setup_keypad(void)
     KEYPAD_GPIO->MODER &= (KEYPAD_ROW_MODER_CLR & KEYPAD_COL_MODER_CLR); /* Clear mode bits. */
     KEYPAD_GPIO->MODER |= (KEYPAD_ROW_MODER_SET | KEYPAD_COL_MODER_SET); /* Set mode bits.   */
        
-    /* Make row pins default to high. */
+    /* Make row pins default to high (pull up resistor). */
     KEYPAD_GPIO->PUPDR &= KEYPAD_PULLUP_RST;
     KEYPAD_GPIO->PUPDR |= KEYPAD_PULLUP_SET;
 }
