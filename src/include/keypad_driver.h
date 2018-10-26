@@ -67,11 +67,12 @@ static const uint16_t keypad_decode_table[KEYPAD_NUM_ROWS][KEYPAD_NUM_COLUMNS] =
                                                                                   {0xF, 0x0, 0xE, 0xD}};
 
                                                                                   
-/* Allow access to this file to see if a key has been pressed. */
+/* Internal variables that stores the key value and if a key was recently pressed. */
 static bool key_pressed_flag = false;
 static uint16_t key_pressed;
 
 
+/* External interface - allows external programs to read key and check/reset key pressed flag. */
 bool check_key_pressed(void);
 uint16_t get_key_pressed(void);
 void clear_key_pressed_flag(void);
