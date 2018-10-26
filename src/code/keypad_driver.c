@@ -1,7 +1,7 @@
 /* - File: keypad_driver.c
 
        - Description
-           - Implements keypad device interface.
+           - Implements keypad device driver.
              
        - Author: Joe Driscoll 
 */
@@ -11,7 +11,7 @@
 #include "stdlib.h"
 
 
-/* Helper function for writing a value to a GPIO's ODR using the BSRR. */
+/* Helper function for writing values to a GPIO (used only in previous labs). */
 static void keypad_write_to_odr(uint16_t value, uint16_t bitmask)
 {
      KEYPAD_GPIO->BSRR |= (value & bitmask) | (((value & bitmask) ^ bitmask) << 16);
@@ -21,17 +21,19 @@ static void keypad_write_to_odr(uint16_t value, uint16_t bitmask)
 /* Reads the key pressed on the keypad and returns the number it represents. */
 static uint16_t read_keypress(void)
 {
-    /* Iterate columns and read every row per iteration. */
+    /* Iterate columns, driving a column low and reading every row per iteration. */
     for (uint16_t column = 0; column < KEYPAD_NUM_COLUMNS; column++)
     {
         /* Drive column low. */
         keypad_write_to_odr(~(0x1 << (column + COL_OFFSET)), 0xF0);
 
+        /* Arbitrary delay to ensure columns are driven low before rows are read. */
         for (int i = 0; i < 10000; i++);
 
+        /* Stores row bits and shifts them all the way to the right. */
         uint16_t shifted_row_input_data = (KEYPAD_ROW_INPUT_DATA >> ROW_OFFSET);
          
-        /* Are any rows driven low? */
+        /* Are any rows driven low? If so, then the column has been found and row must be found. */
         if (shifted_row_input_data != 0xF)
         {
             /* 4-bit value with a zero in current column and ones in other (three) columns. */
