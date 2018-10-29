@@ -132,7 +132,6 @@ void setup_TIM11(void)
     TIM11->DIER &= 0x0;
     TIM11->DIER |= TIM_DIER_CC1IE;
     
-    
     /* Enable capture/compare register - defaults to rising edge. */
     TIM11->CCER |= 0x1;
     
