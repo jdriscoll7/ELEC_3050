@@ -12,22 +12,6 @@
 #include <stdlib.h>    
 
 
-/* Increment timer - returns next time. */
-uint16_t increment_timer(void)
-{
-    /* Increment ones place if tenth's place rolls over. */
-    if (time_tenths == 9)
-    {
-        time_ones = MOD(time_ones + 1, 10);
-    }
-    
-    /* First count (PC[3:0]) is tenth of a second base. */
-    time_tenths = MOD(time_tenths + 1, 10);
-       
-    return get_current_time();
-}
-
-
 /* Clears timer interrupt. */
 void clear_TIM10_interrupt(void)
 {
@@ -41,54 +25,6 @@ void clear_TIM11_interrupt(void)
 {
     NVIC_ClearPendingIRQ(TIM11_IRQn);
     TIM11->SR &= ~0x7;
-}
-
-
-/* Decode timer number. */
-uint16_t decode_timer_number(TIM_TypeDef *timer)
-{
-    switch((uint32_t) timer)
-    {    
-        case ((uint32_t) TIM2):
-            return 2;
-        case ((uint32_t) TIM3):
-            return 3;
-        case ((uint32_t) TIM4):
-            return 4;
-        case ((uint32_t) TIM6):
-            return 6;
-        case ((uint32_t) TIM9):
-            return 9;
-        case ((uint32_t) TIM10):
-            return 10;
-        case ((uint32_t) TIM11):
-            return 11;
-    };
-    
-    return 0;
-}
-
-
-void set_timer_functions(TIM_TypeDef *timer, function_ptr new_functions, uint16_t size)
-{
-    uint16_t timer_number = decode_timer_number(timer);
-    
-    /* Free previous function array. */
-		//free(timer_function_array[timer_number]);
-       
-    /* Reserve memory for function pointers and make room for additional PR clear function. */
-    function_count = size;
-    //timer_function_array = malloc(size*sizeof(function_ptr));
-       
-    /* Set array to the input and add the clear interrupt function at the end. */
-    //timer_function_array[0] = new_functions;
-}
-
-
-/* Function for getting time. */
-uint16_t get_current_time(void)
-{
-    return ((uint16_t) ((time_ones << 4) + time_tenths));
 }
 
 
@@ -183,17 +119,19 @@ void setup_TIM11(void)
     /* Enable TIM11 interrupt source in NVIC. */
     NVIC_EnableIRQ(TIM11_IRQn);
     
-    /* Make TIM11 generate interrupts. */
-    TIM11->DIER |= (TIM_DIER_UIE << 1);
-    
     /* Configure timer to default settings. */
-    configure_timer(TIM11, DEFAULT_PRESCALE, DEFAULT_AUTO_RELOAD);
+    configure_timer(TIM11, TIM11_DEFAULT_PRESCALE, TIM11_DEFAULT_AUTO_RELOAD);
     
     /* Reset all values */
     TIM11->CCMR1 &= 0x0;
     
     /* Edit capture/compare select to input mode. */
     TIM11->CCMR1 |= 0x01;
+    
+    /* Make TIM11 generate interrupts. */
+    TIM11->DIER &= 0x0;
+    TIM11->DIER |= TIM_DIER_CC1IE;
+    
     
     /* Enable capture/compare register - defaults to rising edge. */
     TIM11->CCER |= 0x1;
@@ -203,48 +141,10 @@ void setup_TIM11(void)
 }
 
 
-/* Delays for x seconds by doing meaningless adds. */
-void delay(double seconds)
-{
-    uint32_t count = 0;
-    uint32_t range = 262000 * 2 * seconds; 
-    
-    /* Do 160 thousand adds (based on trial and error). */
-    while (count < range)
-    {
-        count++;
-    }       
-}
-
-
 /* TIM10 interrupt handler. */
 void TIM10_IRQHandler(void)
 {
-    for (int function = 0; function < function_count; function++)
-    {
-        timer_function_array[function]();
-    }
-    
-    clear_TIM10_interrupt();
+    /* This interrupt handler shouldn't be called! (ever) */
+    while(1);
 }
 
-
-/* TIM11 interrupt handler. */
-void TIM11_IRQHandler(void)
-{
-   /* for (int function = 0; function < function_count; function++)
-    {
-        timer_function_array[function]();
-    }
-    
-    clear_TIM11_interrupt(); */
-	  /* Calculate period based on timer count. */
-    double percent_period = ((double) TIM11->CCR1) / (TIM11->ARR + 1);
-    set_tach_period(percent_period * DEFAULT_PERIOD);   
-    
-    /* Reset count value. */
-    clear_timer(TIM11);
-	
-	  clear_TIM11_interrupt();
-	
-}

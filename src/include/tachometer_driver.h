@@ -27,4 +27,7 @@ void set_tach_period(double new_period);
 double get_tach_period(void);
 
 
+/* TIM11 interrupt handler. */
+void TIM11_IRQHandler(void);
+
 #endif
