@@ -17,3 +17,4 @@
 .\objects\tachometer_driver.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\tachometer_driver.o: .\src\include\pwm_gen.h
 .\objects\tachometer_driver.o: .\src\include\tachometer_driver.h
+.\objects\tachometer_driver.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

@@ -39,6 +39,11 @@
 #define ICM_MODE_SET (0x2 << 14)
 #define ICM_MODE_CLR (~(0x01 << 14))
 
+
+/* ADC definitions. */
+#define ADC_MODE 0x3
+
+
 #define NO_SHIFT 0
 
 

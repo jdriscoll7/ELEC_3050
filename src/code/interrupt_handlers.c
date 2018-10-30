@@ -35,22 +35,3 @@ void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield)
     /* Write bsrr bitfield to bsrr of gpio input. */
     gpio->BSRR |= bsrr_bitfield;
 }
-
-
-/* User push button interrupt handler.
-       - Toggles PC8 (an LED).
-       - Sets second counter to count down. */
-void EXTI0_IRQHandler(void)
-{ 
-    /* Toggle PC8 LED. */
-    toggle_GPIO_bitfield(GPIOC, ODR_PIN(8));
-
-    /* Set count direction to down. */
-    count_direction = COUNT_DOWN;
-    
-    /* Clear EXTI pending register for interrupt source 0 (PA0). */
-    EXTI_PR |= EXTI_PR_CLEAR(0);
-
-    /* Clear pending interrupt signal. */
-    NVIC_ClearPendingIRQ(EXTI0_IRQn);
-}

@@ -29,8 +29,4 @@ uint8_t get_count_direction(void);
 void toggle_GPIO_bitfield(GPIO_TypeDef *gpio, uint16_t bitfield);
 
 
-/* User push button interrupt handler. */
-void EXTI0_IRQHandler(void);
-
-
 #endif
