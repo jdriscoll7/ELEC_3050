@@ -118,6 +118,12 @@ static void setup_adc(void)
     /* Make ADC use PA0 as channel. */
     ADC1->SQR5 &= ~ADC_SQR5_SQ1;
     
+    /* Make ADC sample once every 96 cycles.  */
+    ADC1->SMPR3 |= 0x5;
+    
+    /* Enable interrupt in NVIC. */
+    NVIC_EnableIRQ(ADC1_IRQn);
+    
     /* Start first conversion. */
     ADC1->CR2 |= ADC_CR2_SWSTART;
 }

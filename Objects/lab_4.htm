@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lab_4.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lab_4.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Oct 29 23:55:49 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Oct 30 00:25:43 2018
 <BR><P>
 <H3>Maximum Stack Usage =        112 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -612,18 +612,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__default_signal_display
 </UL>
 
-<P><STRONG><a name="[24]"></a>ADC1_IRQHandler</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, tachometer_driver.o(i.ADC1_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = ADC1_IRQHandler &rArr; update_ma_filter &rArr; __aeabi_ddiv
+<P><STRONG><a name="[24]"></a>ADC1_IRQHandler</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, tachometer_driver.o(i.ADC1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = ADC1_IRQHandler &rArr; update_ma_filter &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32l100xc.o(RESET)
 </UL>
 <P><STRONG><a name="[19]"></a>EXTI1_IRQHandler</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, keypad_driver.o(i.EXTI1_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = EXTI1_IRQHandler &rArr; read_keypress
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
+<BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32l100xc.o(RESET)
 </UL>
@@ -636,10 +637,10 @@ Global Symbols
 <P><STRONG><a name="[2d]"></a>TIM11_IRQHandler</STRONG> (Thumb, 80 bytes, Stack size 32 bytes, tachometer_driver.o(i.TIM11_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = TIM11_IRQHandler &rArr; update_ma_filter &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_timer
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_TIM11_interrupt
 </UL>
@@ -711,7 +712,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setup_tachometer_driver
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setup_pwm
@@ -792,11 +793,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[6b]"></a>update_ma_filter</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, tachometer_driver.o(i.update_ma_filter))
+<P><STRONG><a name="[6c]"></a>update_ma_filter</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, tachometer_driver.o(i.update_ma_filter))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = update_ma_filter &rArr; __aeabi_ddiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
@@ -818,7 +819,7 @@ Global Symbols
 <P><STRONG><a name="[8f]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 </UL>
 
 <P><STRONG><a name="[93]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
@@ -827,10 +828,10 @@ Global Symbols
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[6d]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<P><STRONG><a name="[6e]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 <LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM11_IRQHandler
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -841,7 +842,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[8d]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
-<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 </UL>
 
 <P><STRONG><a name="[ca]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
@@ -853,10 +854,11 @@ Global Symbols
 
 <P><STRONG><a name="[cb]"></a>_dfltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu), UNUSED)
 
-<P><STRONG><a name="[6e]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
+<P><STRONG><a name="[6b]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM11_IRQHandler
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC1_IRQHandler
 </UL>
 
 <P><STRONG><a name="[97]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
@@ -882,7 +884,7 @@ Global Symbols
 <P><STRONG><a name="[8e]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dsub
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
+<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_ma_filter
 </UL>
 
 <P><STRONG><a name="[98]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
@@ -949,14 +951,14 @@ Global Symbols
 Local Symbols
 </H3>
 <P><STRONG><a name="[84]"></a>decode_row_col</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, keypad_driver.o(i.decode_row_col))
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
 </UL>
 
 <P><STRONG><a name="[83]"></a>keypad_write_to_odr</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, keypad_driver.o(i.keypad_write_to_odr))
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_keypress
 </UL>
 
-<P><STRONG><a name="[6c]"></a>read_keypress</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, keypad_driver.o(i.read_keypress))
+<P><STRONG><a name="[6d]"></a>read_keypress</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, keypad_driver.o(i.read_keypress))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = read_keypress
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keypad_write_to_odr
@@ -969,7 +971,7 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_TIM11_interrupt
 </UL>
 
-<P><STRONG><a name="[8c]"></a>setup_adc</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, tachometer_driver.o(i.setup_adc))
+<P><STRONG><a name="[8c]"></a>setup_adc</STRONG> (Thumb, 142 bytes, Stack size 0 bytes, tachometer_driver.o(i.setup_adc))
 <BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setup_tachometer_driver
 </UL>
 
