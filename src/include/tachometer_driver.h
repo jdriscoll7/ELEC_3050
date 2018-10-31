@@ -8,6 +8,7 @@
 
 
 #include "pin_definitions.h"
+#include "stdint.h"
 
 
 #ifndef TACHOMETER_DRIVER_H
@@ -20,6 +21,7 @@
 #define ADC_BITS_RAISED ((float) (1 << ADC_BITS))
 #define ADC_STEP (((float) ADC_VOLTAGE_REF) / (ADC_BITS_RAISED - 1))
 
+
 #define MA_WINDOW_SIZE 100
 
 
@@ -31,12 +33,12 @@ typedef struct
     float current_value;
     uint16_t input_buffer[MA_WINDOW_SIZE];
     
-} ma_filter_t;
+} filter_t;
 
-/* Functions that operate on ma_filter_t */
-ma_filter_t *create_ma_filter();
-void update_ma_filter(ma_filter_t *filter, uint16_t input_value);
-float get_ma_output(ma_filter_t *filter);
+/* Functions that operate on filter_t */
+filter_t *create_ma_filter(void);
+void update_ma_filter(filter_t *filter, uint16_t input_value);
+float get_ma_output(filter_t *filter);
 
 
 /* Used to setup tachometer driver. */
