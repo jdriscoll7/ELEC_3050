@@ -28,14 +28,14 @@ typedef struct
 {
     int n;
     int current_index;
-    float current_value;
-    float *input_buffer;
+    uint16_t current_value;
+    uint16_t *input_buffer;
     
 } ma_filter_t;
 
 /* Functions that operate on ma_filter_t */
 ma_filter_t *create_ma_filter(unsigned int n);
-void update_ma_filter(ma_filter_t *filter, float input_value);
+void update_ma_filter(ma_filter_t *filter, uint16_t input_value);
 float get_ma_output(ma_filter_t *filter);
 
 
