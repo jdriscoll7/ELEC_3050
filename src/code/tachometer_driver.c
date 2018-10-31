@@ -19,19 +19,15 @@ static ma_filter_t *amplitude_filter;
 
 
 /* Creates a filter. */
-ma_filter_t *create_ma_filter(unsigned int n)
+ma_filter_t *create_ma_filter()
 {
-    /* Allocate memory. */
-    float *filter_input_buffer = (float *) malloc(n*sizeof(float));
     ma_filter_t *new_filter = (ma_filter_t *) malloc(sizeof(ma_filter_t));
     
     /* Set filter buffer to all zeros then set it to struct. */
     for (unsigned int i = 0; i < n; i++)
     {
-        filter_input_buffer[i] = 0;
+        new_filter->input_buffer[i] = 0;
     }
-    
-    new_filter->input_buffer = filter_input_buffer;
     
     /* Set default values. */
     new_filter->current_value = 0;
@@ -43,13 +39,13 @@ ma_filter_t *create_ma_filter(unsigned int n)
 
 
 /* Feed input values into a filter. */
-void update_ma_filter(ma_filter_t *filter, float input_value)
+void update_ma_filter(ma_filter_t *filter, uint16_t input_value)
 {
     /* Increment index. */
     filter->current_index = MOD(filter->current_index + 1, filter->n);
     
     /* y(t) = y(t-1) + (1/n)(x(t) - x(t-n) */
-	  float value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
+    uint16_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
     filter->current_value += (input_value - value_to_remove) / filter->n;
     
     /* Update input buffer. */
@@ -68,8 +64,8 @@ float get_ma_output(ma_filter_t *filter)
 void setup_tachometer_driver(void)
 {
     /* Setup filters. */
-    amplitude_filter = create_ma_filter(MA_WINDOW_SIZE);
-		period_filter = create_ma_filter(MA_WINDOW_SIZE);
+    amplitude_filter = create_ma_filter();
+    period_filter = create_ma_filter();
     
     /* Setup ADC for amplitude measurements. */
     setup_adc();
