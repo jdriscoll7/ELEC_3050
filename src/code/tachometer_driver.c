@@ -14,17 +14,17 @@
 
 
 /* Keep period estimations different for frequency and amplitude measurements. */
-static ma_filter_t *period_filter;
-static ma_filter_t *amplitude_filter;
+static filter_t *period_filter;
+static filter_t *amplitude_filter;
 
 
 /* Creates a filter. */
-ma_filter_t *create_ma_filter()
+filter_t *create_ma_filter(void)
 {
-    ma_filter_t *new_filter = (ma_filter_t *) malloc(sizeof(ma_filter_t));
+    filter_t *new_filter = (filter_t *) malloc(sizeof(filter_t));
     
     /* Set filter buffer to all zeros then set it to struct. */
-    for (unsigned int i = 0; i < n; i++)
+    for (unsigned int i = 0; i < MA_WINDOW_SIZE; i++)
     {
         new_filter->input_buffer[i] = 0;
     }
@@ -32,14 +32,14 @@ ma_filter_t *create_ma_filter()
     /* Set default values. */
     new_filter->current_value = 0;
     new_filter->current_index = 0;
-    new_filter->n = n;
+    new_filter->n = MA_WINDOW_SIZE;
     
     return new_filter;
 }
 
 
 /* Feed input values into a filter. */
-void update_ma_filter(ma_filter_t *filter, uint16_t input_value)
+void update_ma_filter(filter_t *filter, uint16_t input_value)
 {
     /* Increment index. */
     filter->current_index = MOD(filter->current_index + 1, filter->n);
@@ -54,7 +54,7 @@ void update_ma_filter(ma_filter_t *filter, uint16_t input_value)
 
 
 
-float get_ma_output(ma_filter_t *filter)
+float get_ma_output(filter_t *filter)
 {
     return filter->current_value;
 }
