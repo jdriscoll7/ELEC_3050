@@ -28,7 +28,7 @@ typedef struct
 {
     int n;
     int current_index;
-    uint16_t current_value;
+    float current_value;
     uint16_t *input_buffer;
     
 } ma_filter_t;
