@@ -70,7 +70,7 @@ void setup_tachometer_driver(void)
     /* Setup ADC for amplitude measurements. */
     setup_adc();
     
-	  /* Setup timer and set function defined in this file to handler. */
+    /* Setup timer and set function defined in this file to handler. */
     setup_TIM11();
 	
     enable_timer(TIM11);
@@ -80,7 +80,8 @@ void setup_tachometer_driver(void)
 /* Get latest period measurement of tachometer driver. */
 float get_tach_period(void)
 {
-    return get_ma_output(amplitude_filter);
+    /* Currently only outputs voltage levels - need some more work to output period... */
+    return get_ma_output(ADC_STEP * amplitude_filter);
 }
 
 
@@ -117,7 +118,7 @@ static void setup_adc(void)
     /* Enable interrupt in NVIC. */
     NVIC_EnableIRQ(ADC1_IRQn);
     
-		/* Turn on ADC and wait for power on. */
+    /* Turn on ADC and wait for power on. */
     ADC1->CR2 |= ADC_CR2_ADON;
     while((ADC1->SR & ADC_SR_ADONS) == 0);
 	
@@ -130,11 +131,11 @@ static void setup_adc(void)
 void ADC1_IRQHandler(void)
 {
     /* Inputs an amplitude measurement into the moving average filter. */
-    update_ma_filter(amplitude_filter, ADC_STEP * ((float) ADC1->DR));
+    update_ma_filter(amplitude_filter, ADC1->DR);
 	
-	  /* Clear interrupt pending. */
-	  NVIC_ClearPendingIRQ(ADC1_IRQn);
+    /* Clear interrupt pending. */
+    NVIC_ClearPendingIRQ(ADC1_IRQn);
 	
-	  /* Clear EOC to be safe. */
-	  ADC1->SR &= ~(0x2);
+    /* Clear EOC to be safe. */
+    ADC1->SR &= ~(0x2);
 }
