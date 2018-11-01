@@ -24,7 +24,7 @@ void clear_TIM10_interrupt(void)
 void clear_TIM11_interrupt(void)
 {
     NVIC_ClearPendingIRQ(TIM11_IRQn);
-    TIM11->SR &= ~0x7;
+    TIM11->SR &= ~0x1;
 }
 
 
@@ -65,7 +65,7 @@ void enable_timer(TIM_TypeDef *timer)
 void toggle_enable_timer(TIM_TypeDef *timer)
 {
     /* If on, turn off and vice versa. */
-    if (TIMER_ON_OR_OFF != 0)
+    if ((timer->CR1 & TIM_CR1_CEN) != 0)
     {
         disable_timer(timer);
     }
@@ -125,15 +125,9 @@ void setup_TIM11(void)
     /* Reset all values */
     TIM11->CCMR1 &= 0x0;
     
-    /* Edit capture/compare select to input mode. */
-    TIM11->CCMR1 |= 0x01;
-    
     /* Make TIM11 generate interrupts. */
     TIM11->DIER &= 0x0;
-    TIM11->DIER |= TIM_DIER_CC1IE;
-    
-    /* Enable capture/compare register - defaults to rising edge. */
-    TIM11->CCER |= 0x1;
+    TIM11->DIER |= TIM_DIER_UIE;
     
     /* Timer initially off. */
     disable_timer(TIM11);

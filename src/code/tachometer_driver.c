@@ -14,7 +14,6 @@
 
 
 /* Keep period estimations different for frequency and amplitude measurements. */
-static filter_t *period_filter;
 static filter_t *amplitude_filter;
 
 
@@ -46,7 +45,7 @@ void update_ma_filter(filter_t *filter, uint16_t input_value)
     
     /* y(t) = y(t-1) + (1/n)(x(t) - x(t-n) */
     uint16_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
-    filter->current_value += (input_value - value_to_remove) / filter->n;
+    filter->current_value += ((float)(input_value - value_to_remove)) / filter->n;
     
     /* Update input buffer. */
     filter->input_buffer[filter->current_index] = input_value;
@@ -65,12 +64,11 @@ void setup_tachometer_driver(void)
 {
     /* Setup filters. */
     amplitude_filter = create_ma_filter();
-    period_filter = create_ma_filter();
     
     /* Setup ADC for amplitude measurements. */
     setup_adc();
     
-    /* Setup timer and set function defined in this file to handler. */
+	  /* Setup timer and set function defined in this file to handler. */
     setup_TIM11();
 	
     enable_timer(TIM11);
@@ -80,19 +78,26 @@ void setup_tachometer_driver(void)
 /* Get latest period measurement of tachometer driver. */
 float get_tach_period(void)
 {
-    /* Currently only outputs voltage levels - need some more work to output period... */
-    return get_ma_output(ADC_STEP * amplitude_filter);
+    return ADC_STEP * get_ma_output(amplitude_filter);
 }
 
 
-/* TIM11 interrupt handler - calculates period based on period measurements. */
+/* TIM11 interrupt handler - triggers ADC measurement. */
 void TIM11_IRQHandler(void)
 {
-    /* Calculate period based on signal frequency measurements. */
-    float percent_period = ((float) TIM11->CCR1) / (TIM11->ARR + 1);
-    update_ma_filter(period_filter, percent_period * TIM11_DEFAULT_PERIOD);
-    clear_timer(TIM11);
+    /* Start first conversion. */
+    ADC1->CR2 |= ADC_CR2_SWSTART;
+	
+	  /* Wait for EOC. */
+    while((ADC1->SR & ADC_SR_EOC) == 0);
+	
+		/* Inputs an amplitude measurement into the moving average filter. */
+    update_ma_filter(amplitude_filter, ADC1->DR);
+	
+	  /* Clear EOC to be safe. */
+    ADC1->SR &= ~(0x2);
     
+    clear_timer(TIM11);
     clear_TIM11_interrupt();
 }
 
@@ -103,39 +108,11 @@ static void setup_adc(void)
     /* Turn on clock to ADC. */
     RCC->APB2ENR |= (0x1 << 9);
     
-    /* Make end of conversion (EOC) signal interrupt CPU. */
-    ADC1->CR1 |= ADC_CR1_EOCIE;
-    
-    /* Turn on continuous conversion. */
-    ADC1->CR2 |= (0x1 << 1);
-    
     /* Make ADC use PA0 as channel. */
     ADC1->SQR5 &= ~ADC_SQR5_SQ1;
     
-    /* Make ADC sample once every 96 cycles.  */
-    ADC1->SMPR3 |= 0x5;
-    
-    /* Enable interrupt in NVIC. */
-    NVIC_EnableIRQ(ADC1_IRQn);
-    
-    /* Turn on ADC and wait for power on. */
+		/* Turn on ADC and wait for power on. */
     ADC1->CR2 |= ADC_CR2_ADON;
     while((ADC1->SR & ADC_SR_ADONS) == 0);
 	
-    /* Start first conversion. */
-    ADC1->CR2 |= ADC_CR2_SWSTART;
-}
-
-
-/* ADC interrupt handler for amplitude measurements. */
-void ADC1_IRQHandler(void)
-{
-    /* Inputs an amplitude measurement into the moving average filter. */
-    update_ma_filter(amplitude_filter, ADC1->DR);
-	
-    /* Clear interrupt pending. */
-    NVIC_ClearPendingIRQ(ADC1_IRQn);
-	
-    /* Clear EOC to be safe. */
-    ADC1->SR &= ~(0x2);
 }
