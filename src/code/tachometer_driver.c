@@ -68,9 +68,9 @@ void setup_tachometer_driver(void)
     /* Setup ADC for amplitude measurements. */
     setup_adc();
     
-	  /* Setup timer and set function defined in this file to handler. */
+    /* Setup timer and set function defined in this file to handler. */
     setup_TIM11();
-	
+    
     enable_timer(TIM11);
 }
 
@@ -87,14 +87,14 @@ void TIM11_IRQHandler(void)
 {
     /* Start first conversion. */
     ADC1->CR2 |= ADC_CR2_SWSTART;
-	
-	  /* Wait for EOC. */
+    
+    /* Wait for EOC. */
     while((ADC1->SR & ADC_SR_EOC) == 0);
-	
-		/* Inputs an amplitude measurement into the moving average filter. */
+    
+    /* Inputs an amplitude measurement into the moving average filter. */
     update_ma_filter(amplitude_filter, ADC1->DR);
-	
-	  /* Clear EOC to be safe. */
+    
+    /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
     
     clear_timer(TIM11);
@@ -111,8 +111,8 @@ static void setup_adc(void)
     /* Make ADC use PA0 as channel. */
     ADC1->SQR5 &= ~ADC_SQR5_SQ1;
     
-		/* Turn on ADC and wait for power on. */
+    /* Turn on ADC and wait for power on. */
     ADC1->CR2 |= ADC_CR2_ADON;
     while((ADC1->SR & ADC_SR_ADONS) == 0);
-	
+    
 }
