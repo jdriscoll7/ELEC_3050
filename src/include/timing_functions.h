@@ -23,9 +23,9 @@
 #define DEFAULT_AUTO_RELOAD ((uint16_t) 63999)
 
 
-#define TIM11_DEFAULT_PERIOD      0.1
+#define TIM11_DEFAULT_PERIOD      0.01
 #define TIM11_DEFAULT_PRESCALE    ((uint16_t) 24)
-#define TIM11_DEFAULT_AUTO_RELOAD ((uint16_t) 63999)
+#define TIM11_DEFAULT_AUTO_RELOAD ((uint16_t) 6399)
 
 
 #define TIMER_CLEAR         ((uint16_t) 0x0)

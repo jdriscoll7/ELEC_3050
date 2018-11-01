@@ -22,7 +22,7 @@
 #define ADC_STEP (((float) ADC_VOLTAGE_REF) / (ADC_BITS_RAISED - 1))
 
 
-#define MA_WINDOW_SIZE 100
+#define MA_WINDOW_SIZE 10
 
 
 /* Moving average filter for measurement filtering. */
@@ -55,10 +55,6 @@ void TIM11_IRQHandler(void);
 
 /* Sets up the ADC. */
 static void setup_adc(void);
-
-
-/* ADC interrupt handler for amplitude measurements. */
-void ADC1_IRQHandler(void);
 
 
 #endif
