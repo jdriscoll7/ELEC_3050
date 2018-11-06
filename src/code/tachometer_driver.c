@@ -125,6 +125,10 @@ void TIM11_IRQHandler(void)
     {
         data_acquisition_buffer[data_acquisition_index++] = ADC1->DR;   
     }
+    else if (get_key_pressed() == 0x0)
+    {
+        data_acquisition_index = 0;
+    }
     /*********************************************/
     /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
     /*********************************************/
