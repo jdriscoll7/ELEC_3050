@@ -11,12 +11,14 @@
 #include "timing_functions.h"
 #include "stdlib.h"
 #include "pin_definitions.h"
+#include "keypad_driver.h"    
 
 
 /* 
     To fix data acquisition changes:
         - change TIM11 interrupt to input data to filter
-        - delete data acquisition data (buffer and current index). 
+        - delete data acquisition data (buffer and current index)
+        - delete keypad_driver include
 */
 
 
@@ -119,7 +121,10 @@ void TIM11_IRQHandler(void)
     /*********************************************/
     /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
     /*********************************************/
-    data_acquisition_buffer[data_acquisition_index++] = ADC1->DR;
+    if ((data_acquisition_index < DATA_ACQUISITION_BUFFER_SIZE) && (get_key_pressed() == 0xA))
+    {
+        data_acquisition_buffer[data_acquisition_index++] = ADC1->DR;   
+    }
     /*********************************************/
     /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
     /*********************************************/
