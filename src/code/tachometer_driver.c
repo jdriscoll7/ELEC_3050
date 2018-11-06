@@ -13,6 +13,27 @@
 #include "pin_definitions.h"
 
 
+/* 
+    To fix data acquisition changes:
+        - change TIM11 interrupt to input data to filter
+        - delete data acquisition data (buffer and current index). 
+*/
+
+
+/***********************/
+/* Delete this nephew. */
+/***********************/
+#define DATA_ACQUISITION_TIME        5
+#define DATA_ACQUISITION_BUFFER_SIZE (DATA_ACQUISITION_TIME * 100)
+
+uint16_t data_acquisition_buffer[DATA_ACQUISITION_BUFFER_SIZE];
+uint32_t data_acquisition_index = 0;
+/*********************************/
+/* Stop reading my code, Daylon. */
+/*********************************/
+
+
+
 /* Keep period estimations different for frequency and amplitude measurements. */
 static filter_t *amplitude_filter;
 
@@ -91,8 +112,24 @@ void TIM11_IRQHandler(void)
     /* Wait for EOC. */
     while((ADC1->SR & ADC_SR_EOC) == 0);
     
+    
+    
+    
+    
+    /*********************************************/
+    /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
+    /*********************************************/
+    data_acquisition_buffer[data_acquisition_index++] = ADC1->DR;
+    /*********************************************/
+    /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
+    /*********************************************/
+    
+    
+    
+    
+    
     /* Inputs an amplitude measurement into the moving average filter. */
-    update_ma_filter(amplitude_filter, ADC1->DR);
+    // update_ma_filter(amplitude_filter, ADC1->DR);
     
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
