@@ -78,19 +78,19 @@ void setup_pins()
 }
 
 
-/* Sets up PA0 and PA1 as interrupt sources that trigger EXTI0 and EXTI1 interrupt handlers respectively. */
+/* Sets up PA1 as interrupt source that triggers EXTI1 interrupt handler. */
 void setup_interrupts()
 {
     /* Setup interrupt source via SYSCFG. */
     SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1); /* PA1. */
 
-    /* Setup falling edge trigger for PA0 and PA1. */
+    /* Setup falling edge trigger for PA1. */
     EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1); /* PA1. */
     
-    /* Unmask EXTI0 and EXTI1 interrupt using EXTI module. */
+    /* Unmask EXTI1 interrupt using EXTI module. */
     EXTI_IMR = (EXTI_IMR & ~EXTI1_IMR_MASK) | EXTI1_IMR_MASK; /* PA1. */
 
-    /* Enable interrupt 0 and 1 in NVIC. */
+    /* Enable EXTI interrupt 1 in NVIC. */
     NVIC_EnableIRQ(EXTI1_IRQn);
     
     /* Enable CPU interrupts. */
