@@ -82,13 +82,13 @@ void setup_pins()
 void setup_interrupts()
 {
     /* Setup interrupt source via SYSCFG. */
-    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1); /* PA1. */
+    SYSCFG_EXTICR1 = (SYSCFG_EXTICR1 & ~EXTICRn_PA(1)) | EXTICRn_PA_EN(1);
 
     /* Setup falling edge trigger for PA1. */
-    EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1); /* PA1. */
+    EXTI_FTSR = (EXTI_FTSR & ~EXTI_EDGE_EN(1)) | EXTI_EDGE_EN(1);
     
     /* Unmask EXTI1 interrupt using EXTI module. */
-    EXTI_IMR = (EXTI_IMR & ~EXTI1_IMR_MASK) | EXTI1_IMR_MASK; /* PA1. */
+    EXTI_IMR = (EXTI_IMR & ~EXTI1_IMR_MASK) | EXTI1_IMR_MASK;
 
     /* Enable EXTI interrupt 1 in NVIC. */
     NVIC_EnableIRQ(EXTI1_IRQn);
