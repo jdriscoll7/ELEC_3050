@@ -26,7 +26,7 @@ int main()
         {
             /* Decode key and set the duty cycle. */
             uint16_t key_pressed = get_key_pressed();
-            set_duty_cycle(KEY_TO_DUTY_CYCLE(key_pressed));
+            set_desired_speed(key_pressed);
 
             clear_key_pressed_flag();
         }
