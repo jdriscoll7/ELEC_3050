@@ -129,7 +129,7 @@ void TIM11_IRQHandler(void)
     #endif
     
     /* Inputs an amplitude measurement into the moving average filter. */
-    update_ma_filter(amplitude_filter, ADC1->DR);
+    update_ma_filter(amplitude_filter, ((uint32_t) ADC1->DR) << 20);
     
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
