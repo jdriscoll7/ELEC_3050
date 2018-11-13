@@ -20,8 +20,10 @@
 #define DATA_ACQUISITION_TIME        5
 #define DATA_ACQUISITION_BUFFER_SIZE (DATA_ACQUISITION_TIME * 100)
 
-uint16_t data_acquisition_buffer[DATA_ACQUISITION_BUFFER_SIZE];
-uint32_t data_acquisition_index = 0;
+
+static uint16_t data_acquisition_buffer[DATA_ACQUISITION_BUFFER_SIZE];
+static uint32_t data_acquisition_index = 0;
+
 
 #endif
 
