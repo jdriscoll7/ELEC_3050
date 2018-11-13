@@ -21,6 +21,7 @@
 #include "pin_definitions.h"
 #include "pwm_gen.h"
 #include "tachometer_driver.h"
+#include "pid_controller.h"
 
 
 /* GPIO definitions. */
