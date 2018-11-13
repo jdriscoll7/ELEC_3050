@@ -23,6 +23,12 @@
 #define MA_WINDOW_SIZE 10
 
 
+/* Controller parameters. */
+#define A0 1
+#define A1 1
+#define A2 1
+
+
 /* Reference voltage for ADC is hard-set to 3V. */
 #define ADC_VOLTAGE_REF 3
 #define ADC_BITS 12
