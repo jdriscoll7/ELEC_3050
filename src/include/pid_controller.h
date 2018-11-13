@@ -14,11 +14,11 @@
 uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {471859, 547590, 623320, 699051, 774781, 850512, 926242, 1001973, 1077703, 1153434};
 
 
+uint16_t desired_speed;
 
-uint16_t desired_duty_cycle;
 
-
-void controller_step();
+void controller_step(uint32_t new_data);
+void set_desired_speed(uint16_t desired_speed);
 
 
 #endif
