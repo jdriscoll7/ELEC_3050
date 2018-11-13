@@ -15,14 +15,19 @@
 #define TACHOMETER_DRIVER_H
 
 
+/* Turns data acquisition on and off. */
+#define DATA_ACQUISITION 0
+
+
+/* Number of samples in moving average window. */
+#define MA_WINDOW_SIZE 10
+
+
 /* Reference voltage for ADC is hard-set to 3V. */
 #define ADC_VOLTAGE_REF 3
 #define ADC_BITS 12
 #define ADC_BITS_RAISED ((float) (1 << ADC_BITS))
 #define ADC_STEP (((float) ADC_VOLTAGE_REF) / (ADC_BITS_RAISED - 1))
-
-
-#define MA_WINDOW_SIZE 10
 
 
 /* Moving average filter for measurement filtering. */
