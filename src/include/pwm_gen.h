@@ -33,9 +33,9 @@ uint16_t calculate_ccr(uint16_t arr);
 
 
 /* Static variable that defines current duty cycle (along with getter/setter functions). */
-static float duty_cycle;
-void set_duty_cycle(float new_duty_cycle);
-float get_duty_cycle(void);
+static uint16_t duty_cycle;
+void set_duty_cycle(uint16_t new_duty_cycle);
+uint16_t get_duty_cycle(void);
 
 
 /* Configures timer and other relevant bits. */
