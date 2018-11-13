@@ -19,7 +19,7 @@ static uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {471859, 547590, 623320, 
 #define ERROR_BUFFER_SIZE 3
 
 
-void controller_step(uint32_t new_data);
+void controller_step(uint32_t new_error_data);
 void set_desired_speed(uint16_t new_speed);
 
 
