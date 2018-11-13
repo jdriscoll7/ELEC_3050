@@ -60,7 +60,7 @@ void update_ma_filter(filter_t *filter, uint32_t input_value)
     filter->current_index = MOD(filter->current_index + 1, filter->n);
     
     /* y(t) = y(t-1) + (1/n)(x(t) - x(t-n) */
-    uint32_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
+    int32_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
     filter->current_value += (input_value - value_to_remove) / filter->n;
     
     /* Update input buffer. */
@@ -69,7 +69,7 @@ void update_ma_filter(filter_t *filter, uint32_t input_value)
 
 
 
-uint32_t get_ma_output(filter_t *filter)
+int32_t get_ma_output(filter_t *filter)
 {
     return filter->current_value;
 }
@@ -92,7 +92,7 @@ void setup_tachometer_driver(void)
 
 
 /* Get latest period measurement of tachometer driver. */
-uint32_t get_tach_period(void)
+int32_t get_tach_period(void)
 {
     return get_ma_output(amplitude_filter);
 }
@@ -122,13 +122,14 @@ void TIM11_IRQHandler(void)
     #endif
     
     /* Inputs an amplitude measurement into the moving average filter. */
-    update_ma_filter(amplitude_filter, ((uint32_t) ADC1->DR) << 20);
+    //update_ma_filter(amplitude_filter, ((uint32_t) ADC1->DR));
     
     /* Need to make control step here. */
-    
-       
+    //controller_step((3 * get_ma_output(amplitude_filter) >> 12) << 20);
+    controller_step((3 * ((uint32_t) ADC1->DR) << 20) >> 12);
+			
     /* Need to increment BCD counter. */
-       
+    
        
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);

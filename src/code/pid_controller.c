@@ -7,12 +7,12 @@ static uint16_t desired_speed;
 
 
 /* Used to hold past error measurements. */
-uint32_t error_buffer[ERROR_BUFFER_SIZE];
+int32_t error_buffer[ERROR_BUFFER_SIZE];
 uint8_t error_buffer_indx = 0;
 
 
 /* Holds last control action. */
-uint32_t last_control_action = 0;
+int32_t last_control_action = 0;
 
 
 /* Min and max helper macros. */
@@ -20,13 +20,13 @@ uint32_t last_control_action = 0;
 #define MAX(a,b) (((a) > (b)) ? (a) : (b))
 
 
-void controller_step(uint32_t new_error_data)
+void controller_step(uint32_t speed_data)
 {
     /* Update error buffer. */
-    error_buffer[error_buffer_indx] = new_error_data;
+    error_buffer[error_buffer_indx] = (int32_t) (((uint32_t) speed_to_amplitude_table[desired_speed]) - speed_data);
     
     /* Update and make control action. */
-    last_control_action = last_control_action + A0*error_buffer[0] - A1*error_buffer[1] + A2*error_buffer[2];
+    last_control_action = last_control_action + error_buffer[0]*A0 - error_buffer[1]*A1 + error_buffer[2]*A2;
     
     /* Saturate control action to fit within duty cycle. */
     last_control_action = MIN(MAX(0, last_control_action), 100);
@@ -35,7 +35,7 @@ void controller_step(uint32_t new_error_data)
     set_duty_cycle(last_control_action);
     
     /* Increment error buffer index. */
-    error_buffer_indx++;
+    error_buffer_indx = MOD(error_buffer_indx + 1, ERROR_BUFFER_SIZE);
 }
 
 
