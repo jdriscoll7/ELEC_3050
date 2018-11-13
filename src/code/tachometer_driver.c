@@ -123,7 +123,7 @@ void TIM11_IRQHandler(void)
     update_ma_filter(amplitude_filter, ((uint32_t) ADC1->DR) << 20);
     
     /* Need to make control step here. */
-       
+    
        
     /* Need to increment BCD counter. */
        
