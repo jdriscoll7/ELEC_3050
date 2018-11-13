@@ -48,7 +48,7 @@ typedef struct
 
 /* Functions that operate on filter_t */
 filter_t *create_ma_filter(void);
-void update_ma_filter(filter_t *filter, uint16_t input_value);
+void update_ma_filter(filter_t *filter, uint32_t input_value);
 float get_ma_output(filter_t *filter);
 
 
