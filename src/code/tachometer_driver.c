@@ -61,14 +61,14 @@ filter_t *create_ma_filter(void)
 
 
 /* Feed input values into a filter. */
-void update_ma_filter(filter_t *filter, uint16_t input_value)
+void update_ma_filter(filter_t *filter, uint32_t input_value)
 {
     /* Increment index. */
     filter->current_index = MOD(filter->current_index + 1, filter->n);
     
     /* y(t) = y(t-1) + (1/n)(x(t) - x(t-n) */
-    uint16_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
-    filter->current_value += ((float)(input_value - value_to_remove)) / filter->n;
+    uint32_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
+    filter->current_value += (input_value - value_to_remove) / filter->n;
     
     /* Update input buffer. */
     filter->input_buffer[filter->current_index] = input_value;
