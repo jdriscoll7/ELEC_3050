@@ -33,7 +33,7 @@
 /* Voltage constants for each speed (based on tachometer amplitude measurements). */
 /* Ranges from 0.45V to 1.1 V */
 #define NUM_SPEEDS 10
-uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {471859, 547590, 623320.177777778, 699050.666666667, 774781.155555556, 850511.644444444, 926242.133333333, 1001972.62222222, 1077703.11111111, 1153433.60000000}
+uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {471859, 547590, 623320, 699051, 774781, 850512, 926242, 1001973, 1077703, 1153434}
 
 
 /* Moving average filter for measurement filtering. */
