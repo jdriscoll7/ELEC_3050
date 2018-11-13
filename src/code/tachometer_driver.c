@@ -22,17 +22,17 @@
 */
 
 
-/***********************/
-/* Delete this nephew. */
-/***********************/
+
+/* Allows data acquisition to be turned on and off. */
+#if DATA_ACQUISITION_MODE
+
 #define DATA_ACQUISITION_TIME        5
 #define DATA_ACQUISITION_BUFFER_SIZE (DATA_ACQUISITION_TIME * 100)
 
 uint16_t data_acquisition_buffer[DATA_ACQUISITION_BUFFER_SIZE];
 uint32_t data_acquisition_index = 0;
-/*********************************/
-/* Stop reading my code, Daylon. */
-/*********************************/
+
+#endif
 
 
 
@@ -114,13 +114,9 @@ void TIM11_IRQHandler(void)
     /* Wait for EOC. */
     while((ADC1->SR & ADC_SR_EOC) == 0);
     
-    
-    
-    
-    
-    /*********************************************/
-    /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
-    /*********************************************/
+    /* Do some data recording if data acquisition mode is on. */
+    #if DATA_ACQUISITION_MODE
+       
     if ((data_acquisition_index < DATA_ACQUISITION_BUFFER_SIZE) && (get_key_pressed() == 0xA) || get_key_pressed() == 0x8)
     {
         data_acquisition_buffer[data_acquisition_index++] = ADC1->DR;   
@@ -129,16 +125,11 @@ void TIM11_IRQHandler(void)
     {
         data_acquisition_index = 0;
     }
-    /*********************************************/
-    /* REMOVE THIS - THIS IS FOR DATA_ACQUISITON */
-    /*********************************************/
     
-    
-    
-    
+    #endif
     
     /* Inputs an amplitude measurement into the moving average filter. */
-    // update_ma_filter(amplitude_filter, ADC1->DR);
+    update_ma_filter(amplitude_filter, ADC1->DR);
     
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
