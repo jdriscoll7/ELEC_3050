@@ -10,10 +10,6 @@
 #include "timing_functions.h"
 
 
-/* Static variable that defines current duty cycle (along with getter/setter functions). */
-static float duty_cycle;
-
-
 /* Calculates ARR for a switching frequency. */
 uint16_t calculate_arr(uint32_t frequency)
 {
@@ -24,12 +20,12 @@ uint16_t calculate_arr(uint32_t frequency)
 /* Calculates CCR given arr. */
 uint16_t calculate_ccr(uint16_t arr)
 {
-    return ((uint16_t) ((arr + 1) * duty_cycle));
+    return ((uint16_t) ((arr + 1) * duty_cycle / 100));
 }
 
 
 /* Setter for duty_cycle variable. */
-void set_duty_cycle(float new_duty_cycle)
+void set_duty_cycle(uint16_t new_duty_cycle)
 {
     duty_cycle = new_duty_cycle;
     
@@ -40,7 +36,7 @@ void set_duty_cycle(float new_duty_cycle)
 
 
 /* Getter for duty_cycle variable. */
-float get_duty_cycle(void)
+uint16_t get_duty_cycle(void)
 {
     return duty_cycle;
 }
