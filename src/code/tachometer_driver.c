@@ -14,15 +14,6 @@
 #include "keypad_driver.h"    
 
 
-/* 
-    To fix data acquisition changes:
-        - change TIM11 interrupt to input data to filter
-        - delete data acquisition data (buffer and current index)
-        - delete keypad_driver include
-*/
-
-
-
 /* Allows data acquisition to be turned on and off. */
 #if DATA_ACQUISITION_MODE
 
