@@ -1,5 +1,6 @@
 #include "pid_controller.h"
 #include "pwm_gen.h"
+#include "pin_definitions.h"
 
 
 /* Holds desired speed. */
@@ -26,7 +27,9 @@ void controller_step(uint32_t speed_data)
     error_buffer[error_buffer_indx] = (int32_t) (((uint32_t) speed_to_amplitude_table[desired_speed]) - speed_data);
     
     /* Update and make control action. */
-    last_control_action = last_control_action + error_buffer[0]*A0 - error_buffer[1]*A1 + error_buffer[2]*A2;
+    last_control_action = last_control_action + A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] 
+                                              - A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] 
+                                              + A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)];
     
     /* Saturate control action to fit within duty cycle. */
     last_control_action = MIN(MAX(0, last_control_action), 100);
