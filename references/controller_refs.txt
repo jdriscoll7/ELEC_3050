@@ -1,2 +1,3 @@
 Controller tuning:
-    - http://blog.opticontrols.com/archives/383
+    - http://blog.opticontrols.com/archives/383                    (Cohen-Coon)
+    - https://www.elprocus.com/the-working-of-a-pid-controller/    (Zeigler-Nichols)
