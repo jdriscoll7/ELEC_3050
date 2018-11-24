@@ -14,4 +14,9 @@
 uint8_t increment_timer(void);
 
 
+/* Turns timer on and off. */
+void bcd_timer_off(void);
+void bcd_timer_on(void);
+
+
 #endif
