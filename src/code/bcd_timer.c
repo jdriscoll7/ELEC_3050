@@ -12,8 +12,9 @@
 
 
 /* Timer data. */
-static uint8_t ones_place;
-static uint8_t tenths_place;
+static uint8_t ones_place = 0;
+static uint8_t tenths_place = 0;
+static uint8_t timer_on = 0;
 
 
 /* Increments timer and returns current timer. */
@@ -30,4 +31,18 @@ uint8_t increment_timer(void)
     
     /* Return new BCD value (wrangle into 8 bits). */
     return (((uint8_t) (ones_place << 4)) | tenths_place);
+}
+
+
+/* Turns timer off. */
+void bcd_timer_off(void)
+{
+    timer_on = 0;
+}
+
+
+/* Turns timer on. */
+void bcd_timer_on(void)
+{
+    timer_on = 1;
 }
