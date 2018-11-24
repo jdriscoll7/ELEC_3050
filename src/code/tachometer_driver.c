@@ -12,6 +12,7 @@
 #include "stdlib.h"
 #include "pin_definitions.h"
 #include "keypad_driver.h"    
+#include "bcd_timer.h"
 
 
 /* Allows data acquisition to be turned on and off. */
@@ -67,8 +68,8 @@ void TIM11_IRQHandler(void)
     /* Need to make control step here. */
     controller_step((3 * ((uint32_t) ADC1->DR) << 20) >> 12);
 			
-    /* Need to increment BCD counter. */
-    
+    /* Increment and output value of bcd counter. */
+    increment_timer();
        
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
