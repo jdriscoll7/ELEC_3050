@@ -8,6 +8,7 @@
 
 #include "bcd_timer.h"
 #include "setup.h"
+#include "stdint.h"
 
 
 /* Timer data. */
