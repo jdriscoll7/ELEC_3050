@@ -28,59 +28,9 @@ static uint32_t data_acquisition_index = 0;
 #endif
 
 
-
-/* Keep period estimations different for frequency and amplitude measurements. */
-static filter_t *amplitude_filter;
-
-
-/* Creates a filter. */
-filter_t *create_ma_filter(void)
-{
-    filter_t *new_filter = (filter_t *) malloc(sizeof(filter_t));
-    
-    /* Set filter buffer to all zeros then set it to struct. */
-    for (unsigned int i = 0; i < MA_WINDOW_SIZE; i++)
-    {
-        new_filter->input_buffer[i] = 0;
-    }
-    
-    /* Set default values. */
-    new_filter->current_value = 0;
-    new_filter->current_index = 0;
-    new_filter->n = MA_WINDOW_SIZE;
-    
-    return new_filter;
-}
-
-
-/* Feed input values into a filter. */
-void update_ma_filter(filter_t *filter, uint32_t input_value)
-{
-    /* Increment index. */
-    filter->current_index = MOD(filter->current_index + 1, filter->n);
-    
-    /* y(t) = y(t-1) + (1/n)(x(t) - x(t-n) */
-    int32_t value_to_remove = filter->input_buffer[MOD(filter->current_index + filter->n, filter->n)];
-    filter->current_value += (input_value - value_to_remove) / filter->n;
-    
-    /* Update input buffer. */
-    filter->input_buffer[filter->current_index] = input_value;
-}
-
-
-
-int32_t get_ma_output(filter_t *filter)
-{
-    return filter->current_value;
-}
-
-
 /* Used to setup tachometer driver. */
 void setup_tachometer_driver(void)
 {
-    /* Setup filters. */
-    amplitude_filter = create_ma_filter();
-    
     /* Setup ADC for amplitude measurements. */
     setup_adc();
     
@@ -88,13 +38,6 @@ void setup_tachometer_driver(void)
     setup_TIM11();
     
     enable_timer(TIM11);
-}
-
-
-/* Get latest period measurement of tachometer driver. */
-int32_t get_tach_period(void)
-{
-    return get_ma_output(amplitude_filter);
 }
 
 
@@ -120,12 +63,8 @@ void TIM11_IRQHandler(void)
     }
     
     #endif
-    
-    /* Inputs an amplitude measurement into the moving average filter. */
-    //update_ma_filter(amplitude_filter, ((uint32_t) ADC1->DR));
-    
+ 
     /* Need to make control step here. */
-    //controller_step((3 * get_ma_output(amplitude_filter) >> 12) << 20);
     controller_step((3 * ((uint32_t) ADC1->DR) << 20) >> 12);
 			
     /* Need to increment BCD counter. */
