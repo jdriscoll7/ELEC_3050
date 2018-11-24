@@ -30,6 +30,10 @@ static uint32_t data_acquisition_index = 0;
 #endif
 
 
+/* BCD timer needs to interrupt every 100ms (10 timer interrupts) - use counter to do this. */
+static uint8_t interrupt_count = 0;
+
+
 /* Used to setup tachometer driver. */
 void setup_tachometer_driver(void)
 {
@@ -50,7 +54,7 @@ void TIM11_IRQHandler(void)
     ADC1->CR2 |= ADC_CR2_SWSTART;
     
     /* Wait for EOC. */
-    while((ADC1->SR & ADC_SR_EOC) == 0);
+    while ((ADC1->SR & ADC_SR_EOC) == 0);
     
     /* Do some data recording if data acquisition mode is on. */
     #if DATA_ACQUISITION_MODE
@@ -68,13 +72,20 @@ void TIM11_IRQHandler(void)
  
     /* Need to make control step here. */
     controller_step((3 * ((uint32_t) ADC1->DR) << 20) >> 12);
-			
+
+    /* Increment number of times this interrupt has triggered (for BCD timer). */
+    interrupt_count = MOD(interrupt_count + 1, 10);
+    
     /* Increment and output value of bcd counter. */
-    write_to_odr(GPIOC, (uint16_t) increment_timer(), NO_SHIFT, 0xFF);
-       
+    if (interrupt_count == 0)
+    {
+        write_to_odr(GPIOC, (uint16_t) increment_timer(), NO_SHIFT, 0xFF);
+    }
+    
     /* Clear EOC to be safe. */
     ADC1->SR &= ~(0x2);
     
+    /* Clear other interrupt flags and data (like timer count). */
     clear_timer(TIM11);
     clear_TIM11_interrupt();
 }
@@ -92,5 +103,4 @@ static void setup_adc(void)
     /* Turn on ADC and wait for power on. */
     ADC1->CR2 |= ADC_CR2_ADON;
     while((ADC1->SR & ADC_SR_ADONS) == 0);
-    
 }
