@@ -24,7 +24,7 @@ int32_t last_control_action = 0;
 void controller_step(uint32_t speed_data)
 {
     /* Update error buffer. */
-    error_buffer[error_buffer_indx] = (int32_t) (((uint32_t) speed_to_amplitude_table[desired_speed]) - speed_data);
+    error_buffer[error_buffer_indx] = (int32_t) (speed_to_amplitude_table[desired_speed] - speed_data);
     
     /* Update and make control action. */
     last_control_action = last_control_action + ((A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] 
