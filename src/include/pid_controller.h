@@ -5,9 +5,9 @@
 
 
 /* Controller parameters. */
-#define A0 892
-#define A1 913
-#define A2 126
+static uint32_t A0 = 892;
+static uint32_t A1 = 913;
+static uint32_t A2 = 126;
 
 
 /* Voltage constants for each speed (based on tachometer amplitude measurements). */
