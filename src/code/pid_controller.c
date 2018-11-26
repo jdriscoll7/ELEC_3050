@@ -28,8 +28,8 @@ void controller_step(uint32_t speed_data)
     
     /* Update and make control action. */
     last_control_action = last_control_action + ((A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] 
-                                              - A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] 
-                                              + A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)]) >> 20);
+                                              -   A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] 
+                                              +   A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)]) >> 20);
     
     /* Saturate control action to fit within duty cycle. */
     last_control_action = MIN(MAX(0, last_control_action), 100);
