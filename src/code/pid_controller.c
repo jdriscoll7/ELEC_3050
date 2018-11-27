@@ -46,4 +46,9 @@ void controller_step(uint32_t speed_data)
 void set_desired_speed(uint16_t new_speed)
 {
     desired_speed = new_speed;
+    
+    /* Clear all errors. */
+    error_buffer[0] = 0;
+    error_buffer[1] = 0;
+    error_buffer[2] = 0;
 }
