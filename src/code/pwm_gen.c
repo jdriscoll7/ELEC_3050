@@ -25,7 +25,7 @@ uint16_t calculate_ccr(uint16_t arr)
 
 
 /* Setter for duty_cycle variable. */
-inline void set_duty_cycle(uint16_t new_duty_cycle)
+void set_duty_cycle(uint16_t new_duty_cycle)
 {
     duty_cycle = new_duty_cycle;
     

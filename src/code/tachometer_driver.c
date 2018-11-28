@@ -71,7 +71,7 @@ void TIM11_IRQHandler(void)
     #endif
  
     /* Need to make control step here. */
-    controller_step((3 * ((uint32_t) ADC1->DR) << 20) >> 12);
+    controller_step(3 * ((uint32_t) ADC1->DR) << 8);
 
     /* Increment number of times this interrupt has triggered (for BCD timer). */
     interrupt_count = MOD(interrupt_count + 1, 10);

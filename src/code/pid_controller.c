@@ -23,13 +23,20 @@ int32_t last_control_action = 0;
 
 void controller_step(uint32_t speed_data)
 {
+    
+    if (desired_speed == 0)
+    {
+        set_duty_cycle(0);
+    }
+    else
+    {
     /* Update error buffer. */
-    error_buffer[error_buffer_indx] = (int32_t) (speed_to_amplitude_table[desired_speed] - speed_data);
+    error_buffer[error_buffer_indx] = (int32_t) (((int32_t) speed_to_amplitude_table[desired_speed]) - ((int32_t) speed_data));
     
     /* Update and make control action. */
-    last_control_action = last_control_action + ((A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] 
-                                              -   A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] 
-                                              +   A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)]) >> 20);
+    last_control_action = last_control_action + ((((A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)]) >> 20) 
+                                              -   ((A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)]) >> 20) 
+                                              +   ((A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)]) >> 20)));
     
     /* Saturate control action to fit within duty cycle. */
     last_control_action = MIN(MAX(0, last_control_action), 100);
@@ -39,6 +46,7 @@ void controller_step(uint32_t speed_data)
     
     /* Increment error buffer index. */
     error_buffer_indx = MOD(error_buffer_indx + 1, ERROR_BUFFER_SIZE);
+    }
 }
 
 
