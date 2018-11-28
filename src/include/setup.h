@@ -22,6 +22,7 @@
 #include "pwm_gen.h"
 #include "tachometer_driver.h"
 #include "pid_controller.h"
+#include "bcd_timer.h"
 
 
 /* GPIO definitions. */
