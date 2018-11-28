@@ -12,8 +12,8 @@
 
 
 /* Define on and off keys for bcd timer. */
-#define ON_KEY  0xF
-#define OFF_KEY 0xE
+#define TOGGLE_KEY 0xF
+#define CLEAR_KEY  0xE
 
 
 int main()
@@ -32,15 +32,25 @@ int main()
             /* Decode key and set the duty cycle. */
             uint16_t key_pressed = get_key_pressed();
             
+            uint8_t timer_status = get_timer_status();
+            
             /* See if key controls bcd timer or motor speed. */
             switch (key_pressed)
             {
-                case ON_KEY:
-                    bcd_timer_on();
+                case TOGGLE_KEY:
+                    if (timer_status == 0)
+                    {
+                        bcd_timer_on();
+                    }
+                    else
+                    {
+                        bcd_timer_off();
+                    }
+                    
                     break;
                     
-                case OFF_KEY:
-                    bcd_timer_off();
+                case CLEAR_KEY:
+                    clear_bcd();
                     break;
                     
                 default:
