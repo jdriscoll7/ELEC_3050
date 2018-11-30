@@ -4,10 +4,15 @@
 #include <stdint.h>
 
 
+/* Special macro for tuning mode. */
+#define TUNING_MODE 1
+
+
 /* Controller parameters. */
 static int32_t A0 = 29000;
 static int32_t A1 = 27000;
 static int32_t A2 = 230;
+
 
 //static int32_t A0 = 892;
 //static int32_t A1 = 913;
