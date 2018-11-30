@@ -19,7 +19,8 @@ static int32_t A2 = 230;
 #define NUM_SPEEDS 11
 
 
-static uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {0, 471859, 547590, 623320, 699051, 774781, 850512, 926242, 1001973, 1077703, 1153434};
+// static uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {0, 471859, 547590, 623320, 699051, 774781, 850512, 926242, 1001973, 1077703, 1153434};
+static uint32_t speed_to_amplitude_table[NUM_SPEEDS] = {0, 461, 535, 609, 683, 757, 831, 905, 979, 1052, 1126};
 
 
 /* Defines size of error buffer - needed for PID control. */
