@@ -19,6 +19,14 @@ static int32_t A2 = 230;
 //static int32_t A2 = 126;
 
 
+/* These variables should only exist when in tuning mode. */
+#if TUNING_MODE
+static int64_t Kp = 1;
+static int64_t Ki = 0;
+static int64_t Kd = 0;
+#endif
+
+
 /* Voltage constants for each speed (based on tachometer amplitude measurements). */
 /* Ranges from 0.45V to 1.1 V */
 #define NUM_SPEEDS 11
