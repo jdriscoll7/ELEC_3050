@@ -9,9 +9,9 @@
 
 
 /* Controller parameters. */
-static int32_t A0 = 29000;
-static int32_t A1 = 27000;
-static int32_t A2 = 230;
+static int64_t A0 = 29000;
+static int64_t A1 = 27000;
+static int64_t A2 = 230;
 
 
 //static int32_t A0 = 892;
