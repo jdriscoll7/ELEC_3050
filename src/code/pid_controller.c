@@ -35,19 +35,25 @@ void controller_step(uint32_t speed_data)
     else
     {
         /* Update error buffer. */
-        error_buffer[error_buffer_indx] = (int32_t) (((int32_t) speed_to_amplitude_table[desired_speed]) - ((int32_t) speed_data));
+        error_buffer[error_buffer_indx] = (int64_t) (((int64_t) speed_to_amplitude_table[desired_speed]) - ((int64_t) speed_data));
 
         #if TUNING_MODE
         
         /* Calculate A0, A1, A2 dynamically in terms of constants. */
-        int32_t new_A0 = Kp + (Ki / 200) + (100 * Kd);
-        int32_t new_A1 = Kp + (200 * Kd) - (Ki/200);
-        int32_t new_A2 = Kd * 100;
+        //int64_t new_A0 = (Kp) + (Ki) + (100 * (Kd));
+        //int64_t new_A1 = (Kp) + (200 * (Kd)) - ((Ki) / 200);
+        //int64_t new_A2 = (Kd) * 100;
         
         /* Update and make control action. */
-        last_control_action = last_control_action + (((new_A0*error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)]) 
-                                                  -   (new_A1*error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)]) 
-                                                  +   (new_A2*error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)])) >> 10);
+        int64_t err0 =  (error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] * Kp)
+                      + (error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] * (Ki) / 200
+                      + (error_buffer[MOD(error_buffer_indx, ERROR_BUFFER_SIZE)] * (100 * (Kd))));
+        int64_t err1 =  (error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] * Kp)
+                      - (error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] * (Ki) / 200)
+                      + (error_buffer[MOD(error_buffer_indx - 1, ERROR_BUFFER_SIZE)] * (200 * (Kd)));
+        int64_t err2 = error_buffer[MOD(error_buffer_indx - 2, ERROR_BUFFER_SIZE)] * (Kd*100);
+        
+        last_control_action = last_control_action + err0 - err1 + err2;
 
         
         #else
@@ -76,4 +82,8 @@ void controller_step(uint32_t speed_data)
 void set_desired_speed(uint16_t new_speed)
 {
     desired_speed = new_speed;
+    
+    error_buffer[0] = 0;
+    error_buffer[1] = 0;
+    error_buffer[2] = 0;
 }
